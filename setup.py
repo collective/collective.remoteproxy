@@ -42,7 +42,7 @@ setup(
         'plone.app.dexterity',
         'requests',
         'lxml',
-        'beautifulsoup4',
+        # 'beautifulsoup4',
         'setuptools',
     ],
     extras_require={

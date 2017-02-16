@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from .interfaces import IProxyType
-from bs4 import UnicodeDammit
-from lxml.html.clean import clean_html
+# from bs4 import UnicodeDammit
+# from lxml.html.clean import clean_html
 from plone.memoize import ram
 from plone.memoize.volatile import DontCache
 from time import time
