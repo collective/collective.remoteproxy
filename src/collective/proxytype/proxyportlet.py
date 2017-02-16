@@ -32,6 +32,7 @@ class IProxyBasePortlet(IPortletDataProvider):
             u'Title of the rendered portlet.'
         ),
         required=False,
+        default=u""
     )
 
 
@@ -44,16 +45,25 @@ class IProxyPortlet(IProxyBasePortlet, IProxySchema):
 class Assignment(base.Assignment):
     implements(IProxyPortlet)
 
-    header = u""
-    remote_url = None
-
     def __init__(
         self,
-        header=u"",
-        remote_url=None
+        header,
+        remote_url,
+        exclude_urls,
+        content_selector,
+        append_script,
+        append_link,
+        append_style,
+        cache_time
     ):
         self.header = header
         self.remote_url = remote_url
+        self.exclude_urls = exclude_urls
+        self.content_selector = content_selector
+        self.append_script = append_script
+        self.append_link = append_link
+        self.append_style = append_style
+        self.cache_time = cache_time
 
     @property
     def title(self):
@@ -71,7 +81,14 @@ class Renderer(base.Renderer):
         return True
 
     def get_content(self):
-        content, content_type = get_content(self.data.remote_url)
+        content, content_type = get_content(
+            remote_url=self.data.remote_url,
+            content_selector=self.data.content_selector,
+            append_script=self.data.append_script,
+            append_link=self.data.append_link,
+            append_style=self.data.append_style,
+            cache_time=self.data.cache_time
+        )
         return content
 
     def update(self):

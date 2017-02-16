@@ -43,12 +43,12 @@ class ProxyView(BrowserView):
         url = urlparse.urlunparse(url_parts)
 
         self.content, content_type = get_content(
-            url,
-            getattr(self.context, 'content_selector', None),
-            getattr(self.context, 'append_script', False),
-            getattr(self.context, 'append_link', False),
-            getattr(self.context, 'append_style', False),
-            getattr(self.context, 'cache_time', 3600)
+            remote_url=url,
+            content_selector=getattr(self.context, 'content_selector', None),
+            append_script=getattr(self.context, 'append_script', False),
+            append_link=getattr(self.context, 'append_link', False),
+            append_style=getattr(self.context, 'append_style', False),
+            cache_time=getattr(self.context, 'cache_time', 3600)
         )
 
         if 'text/html' not in content_type:

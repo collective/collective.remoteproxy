@@ -42,14 +42,12 @@ def get_content(
     remote_url,
     content_selector=None,
     append_script=False,
-    append_style=False,
     append_link=False,
+    append_style=False,
     cache_time=3600
 ):
     """Get remote html content.
     """
-
-    print("CACHE MISS")
 
     res = requests.get(remote_url)
 
@@ -88,19 +86,20 @@ def get_content(
         for el in c_tree
     ])
 
+    # Create a list of remote_url, absolute_url tuples for replacement from
+    # all proxytype contents. This enables automatically linking to other
+    # proxied contents.
     cat = plone.api.portal.get_tool('portal_catalog')
-    res = cat.searchResults(
+    proxied_contents = cat.searchResults(
         object_provides=IProxyType.__identifier__
     )
-
-    # Create a list of remote_url, absolute_url tuples for the replacement
     repl_map = [
         (
             it.getObject().remote_url,
             u'{0}/@@proxyview/'.format(it.getObject().absolute_url()),
             it.getObject().exclude_urls
         )
-        for it in res
+        for it in proxied_contents
     ]
 
     # Reverse sort the replacement values to support proxyviews in proxyviews
