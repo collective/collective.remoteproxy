@@ -31,7 +31,10 @@ class ProxyView(BrowserView):
         url_parts = list(urlparse.urlparse(url))
 
         # Update path
-        subpath = getattr(self, 'subpath', [])
+        subpath = self.request.get(
+            'collective.proxytype__subpath',
+            getattr(self, 'subpath', [])
+        )
         if subpath:
             url_parts[2] = '/'.join([url_parts[2].rstrip('/')] + subpath)
 

@@ -10,6 +10,11 @@
   <includeDependencies package="." />
   <include package="plone.app.contentmenu"/>
 
+  <adapter
+      factory=".traverser.ProxyTraverser"
+      permission="zope.Public"
+      />
+
   <browser:page
       name      ="proxyview"
       for       =".interfaces.IProxyType"
