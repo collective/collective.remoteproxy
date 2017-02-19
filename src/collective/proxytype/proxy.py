@@ -95,8 +95,8 @@ def get_content(
     )
     repl_map = [
         (
-            it.getObject().remote_url,
-            u'{0}/@@proxyview/'.format(it.getObject().absolute_url()),
+            it.getObject().remote_url.rstrip('/'),
+            it.getObject().absolute_url(),
             it.getObject().exclude_urls
         )
         for it in proxied_contents
