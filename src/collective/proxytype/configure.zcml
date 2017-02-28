@@ -43,5 +43,13 @@
       description="Installs the collective.proxytype add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="collective.proxytype uninstall"
+      directory="profiles/uninstall"
+      description="Uninstalls the collective.proxytype add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
 
 </configure>

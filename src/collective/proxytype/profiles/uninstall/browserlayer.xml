@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layers>
+  <layer
+      remove="True"
+      name="collective.proxytype"
+      interface="collective.proxytype.interfaces.IBrowserLayer"
+      />
+</layers>
