@@ -2,10 +2,10 @@
 from . import _
 from ..interfaces import IRemoteProxySchema
 from ..remoteproxy import get_content
-from Products.CMFPlone.utils import getFSVersionTuple
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
+from Products.CMFPlone.utils import getFSVersionTuple
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 from zope.interface import implements
 

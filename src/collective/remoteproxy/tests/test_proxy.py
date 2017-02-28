@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-from plone.app.testing import TEST_USER_ID
-from zope.component import queryUtility
-from zope.component import createObject
-from plone.app.testing import setRoles
-from plone.dexterity.interfaces import IDexterityFTI
-from plone import api
-
-from collective.remoteproxy.testing import COLLECTIVE_PROXY_INTEGRATION_TESTING  # noqa
 from collective.remoteproxy.behaviors import IRemoteProxyBehavior
 from collective.remoteproxy.interfaces import IRemoteProxySchema
+from collective.remoteproxy.testing import COLLECTIVE_PROXY_INTEGRATION_TESTING  # noqa
+from plone import api
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.dexterity.interfaces import IDexterityFTI
+from zope.component import createObject
+from zope.component import queryUtility
 
 import unittest2 as unittest
 
