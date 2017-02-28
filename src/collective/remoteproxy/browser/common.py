@@ -15,7 +15,7 @@ class RemoteProxyBaseView(object):
     templatename = None
     content = None
 
-    def __call__(self):
+    def __call__(self, *args, **kwargs):
 
         url = self.context.remote_url
 
@@ -38,12 +38,17 @@ class RemoteProxyBaseView(object):
 
         url = urlparse.urlunparse(url_parts)
 
+        # if default view is not remoteproxyview, we have to append
+        # ``@@remoteproxyview`` to the replaced URLs.
+        add_viewname = 'remoteproxyview' not in self.context.getLayout()
+
         self.content, content_type = get_content(
             remote_url=url,
             content_selector=getattr(self.context, 'content_selector', None),
             append_script=getattr(self.context, 'append_script', False),
             append_link=getattr(self.context, 'append_link', False),
             append_style=getattr(self.context, 'append_style', False),
+            add_viewname=add_viewname,
             cache_time=getattr(self.context, 'cache_time', 3600)
         )
 
@@ -51,13 +56,11 @@ class RemoteProxyBaseView(object):
             self.request.response.setHeader('Content-type', content_type)
             return self.content
 
-        return ViewPageTemplateFile(self.templatename)(self)
+        return self.index(*args, **kwargs)
 
 
 @implementer(IPublishTraverse)
 class RemoteProxyView(RemoteProxyBaseView, BrowserView):
-
-    templatename = 'view.pt'
 
     def publishTraverse(self, request, name):
         """Subpath traverser
@@ -69,7 +72,4 @@ class RemoteProxyView(RemoteProxyBaseView, BrowserView):
 
 
 class RemoteProxyTile(RemoteProxyBaseView, Tile):
-
-    templatename = 'tile.pt'
-
-#
+    pass
