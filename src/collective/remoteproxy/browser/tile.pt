@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<body>
+
+  <tal:proxy replace="structure view/content" />
+
+</body>
+</html>

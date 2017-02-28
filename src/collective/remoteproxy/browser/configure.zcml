@@ -7,13 +7,25 @@
   <include package="plone.app.contentmenu"/>
 
   <browser:page
-      name      ="remoteproxyview"
-      for       ="..behaviors.IRemoteProxyBehavior"
-      class     =".view.RemoteProxyView"
-      layer     ="..interfaces.IBrowserLayer"
+      name="remoteproxyview"
+      for="..behaviors.IRemoteProxyBehavior"
+      class=".common.RemoteProxyView"
+      layer="..interfaces.IBrowserLayer"
       permission="zope2.View"
-      menu      ="plone_displayviews"
-      title     ="Remote Proxy View"
+      menu="plone_displayviews"
+      title="Remote Proxy View"
       />
+
+  <configure zcml:condition="installed plone.tiles">
+    <include package="plone.tiles" file="meta.zcml" />
+    <plone:tile
+        name="remoteproxytile"
+        for="..behaviors.IRemoteProxyBehavior"
+        class=".common.RemoteProxyTile"
+        add_permission="cmf.ModifyPortalContent"
+        permission="zope2.View"
+        title="Remote Proxy Display"
+    />
+  </configure>
 
 </configure>

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from ..remoteproxy import get_content
+from plone.tiles.tile import Tile
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from urllib import urlencode
@@ -9,18 +10,10 @@ from zope.publisher.interfaces import IPublishTraverse
 import urlparse
 
 
-@implementer(IPublishTraverse)
-class RemoteProxyView(BrowserView):
+class RemoteProxyBaseView(BrowserView):
 
+    templatename = None
     content = None
-
-    def publishTraverse(self, request, name):
-        """Subpath traverser
-        """
-        if getattr(self, 'subpath', None) is None:
-            self.subpath = []
-        self.subpath.append(name)
-        return self
 
     def __call__(self):
 
@@ -61,4 +54,30 @@ class RemoteProxyView(BrowserView):
             self.request.response.setHeader('Content-type', content_type)
             return self.content
 
-        return ViewPageTemplateFile('view.pt')(self)
+        return ViewPageTemplateFile(self.templatename)(self)
+
+
+@implementer(IPublishTraverse)
+class RemoteProxyView(RemoteProxyBaseView):
+
+    templatename = 'view.pt'
+
+    def publishTraverse(self, request, name):
+        """Subpath traverser
+        """
+        if getattr(self, 'subpath', None) is None:
+            self.subpath = []
+        self.subpath.append(name)
+        return self
+
+
+class RemoteProxyTile(RemoteProxyBaseView, Tile):
+
+    templatename = 'tile.pt'
+
+    def __init__(self, context, request):
+        super(RemoteProxyTile, self).__init__(context, request)
+        import pdb
+        pdb.set_trace()
+        # This method is not necessary, but if you have to debug something,
+        # place a pdb here.

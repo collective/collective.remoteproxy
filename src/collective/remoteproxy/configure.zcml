@@ -14,7 +14,7 @@
       />
 
   <plone:behavior
-      name="remoteproxy"
+      name="collective.remoteproxy"
       title="Remote Proxy"
       description="Behavior for proxying remote content."
       provides=".behaviors.IRemoteProxyBehavior"
