@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.remoteproxy.portlets import _
 from collective.remoteproxy.interfaces import IRemoteProxySchema
+from collective.remoteproxy.portlets import _
 from collective.remoteproxy.remoteproxy import get_content
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
@@ -101,9 +101,9 @@ class AddForm(base_AddForm):
     else:
         fields = field.Fields(IRemoteProxyPortlet)
 
-    label = _(u"Add Remote Proxy Portlet")
+    label = _(u'Add Remote Proxy Portlet')
     description = _(
-        u"This portlet allows to display remote content."
+        u'This portlet allows to display remote content.'
     )
 
     def create(self, data):
@@ -116,7 +116,7 @@ class EditForm(base_EditForm):
     else:
         fields = field.Fields(IRemoteProxyPortlet)
 
-    label = _(u"Edit Remote Proxy Portlet")
+    label = _(u'Edit Remote Proxy Portlet')
     description = _(
-        u"This portlet allows to display remote content."
+        u'This portlet allows to display remote content.'
     )
