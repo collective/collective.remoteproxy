@@ -22,17 +22,20 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="collective.remoteproxy"
+      title="Remote Proxy"
       directory="profiles/default"
       description="Installs the collective.remoteproxy add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   <genericsetup:registerProfile
       name="uninstall"
-      title="collective.remoteproxy uninstall"
+      title="Remote Proxy uninstall"
       directory="profiles/uninstall"
       description="Uninstalls the collective.remoteproxy add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="collective.remoteproxy-hiddenprofiles"
+  />
 </configure>
