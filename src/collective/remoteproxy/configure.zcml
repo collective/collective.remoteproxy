@@ -7,6 +7,8 @@
 
   <i18n:registerTranslations directory="locales" />
   <includeDependencies package="." />
+  <include package=".browser" />
+  <include package=".portlets" zcml:condition="installed plone.portlets" />
 
   <adapter
       factory=".traverser.RemoteProxyTraverser"
