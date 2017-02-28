@@ -1,22 +1,52 @@
+*.py[co]
+
+# Packages
+*.egg
 *.egg-info
+/dist
+/build
+/eggs
+/parts
+/bin
+/var
+/sdist
+/develop-eggs
+/local
+
+# Installer logs
+pip-log.txt
+pip-selfcheck.json
+
+# Unit test / coverage reports
+/.coverage
+/.tox
+/htmlcov
+
+# Translations
 *.mo
-*.pyc
-.installed.cfg
-.mr.developer.cfg
-.project
-.pydevproject
-.settings/
-bin/
-buildout-cache/
-develop-eggs/
-parts/
-src/*
-!src/collective
-var/
-htmlcov/
-.coverage
-*.log
-output.xml
+
+# editors
+*.sublime*
+
+# mr.developer
+/.mr.developer.cfg
+/.installed.cfg
+/devsrc
+
+# developement
+/.project
+/.pydevproject
+/.settings
+.DS_Store
 *.swp
-log.html
-report.html
+local.cfg
+/temp_resources
+/node_modules
+Gruntfile.js
+package.json
+
+# virtualenv
+/include
+/lib
+/.Python
+
