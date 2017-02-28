@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..remoteproxy import get_content
+from collective.remoteproxy.remoteproxy import get_content
 from plone.tiles.tile import Tile
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile

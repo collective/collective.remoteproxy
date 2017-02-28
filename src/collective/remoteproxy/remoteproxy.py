@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .behaviors import IRemoteProxyBehavior
+from collective.remoteproxy.behaviors import IRemoteProxyBehavior
 # from bs4 import UnicodeDammit
 # from lxml.html.clean import clean_html
 from plone.memoize import ram
@@ -7,7 +7,7 @@ from plone.memoize.volatile import DontCache
 from time import time
 
 import lxml
-import plone.api.portal
+import plone.api
 import re
 import requests
 

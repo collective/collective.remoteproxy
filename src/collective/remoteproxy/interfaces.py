@@ -17,12 +17,12 @@ class IRemoteProxySchema(Interface):
 
     remote_url = schema.TextLine(
         title=_(
-            "label_remote_url",
-            default=u"Remote URL"
+            'label_remote_url',
+            default=u'Remote URL'
         ),
         description=_(
-            "help_remote_url",
-            default="URL of the remote content which should be displayed here."
+            'help_remote_url',
+            default='URL of the remote content which should be displayed here.'
         ),
         required=True,
     )
@@ -46,25 +46,25 @@ class IRemoteProxySchema(Interface):
 
     content_selector = schema.TextLine(
         title=_(
-            "label_content_selector",
-            default=u"Content Selector"
+            'label_content_selector',
+            default=u'Content Selector'
         ),
         description=_(
-            "help_remote_url",
-            default=u"CSS Selector of the content. If given, only the matching content will be used. If not given, the content response will be used as a whole."  # noqa
+            'help_remote_url',
+            default=u'CSS Selector of the content. If given, only the matching content will be used. If not given, the content response will be used as a whole.'  # noqa
         ),
         required=True,
-        default=u"html body > *"
+        default=u'html body > *'
     )
 
     append_script = schema.Bool(
         title=_(
-            "label_copy_script",
-            default=u"Append Script tags"
+            'label_copy_script',
+            default=u'Append Script tags'
         ),
         description=_(
-            "help_copy_script",
-            default=u"Copy JavaScript resources from the content header into the body, so that they will be included in the output."  # noqa
+            'help_copy_script',
+            default=u'Copy JavaScript resources from the content header into the body, so that they will be included in the output.'  # noqa
         ),
         required=False,
         default=False,
@@ -72,12 +72,12 @@ class IRemoteProxySchema(Interface):
 
     append_link = schema.Bool(
         title=_(
-            "label_copy_link",
-            default=u"Append Link tags",
+            'label_copy_link',
+            default=u'Append Link tags',
         ),
         description=_(
-            "help_copy_header_link",
-            default=u"Copy CSS link resources from the content header into the body, so that they will be included in the output."  # noqa
+            'help_copy_header_link',
+            default=u'Copy CSS link resources from the content header into the body, so that they will be included in the output.'  # noqa
         ),
         required=False,
         default=False,
@@ -85,12 +85,12 @@ class IRemoteProxySchema(Interface):
 
     append_style = schema.Bool(
         title=_(
-            "label_copy_style",
-            default=u"Append Style tags",
+            'label_copy_style',
+            default=u'Append Style tags',
         ),
         description=_(
-            "help_copy_style",
-            default=u"Copy CSS style resources from the content header into the body, so that they will be included in the output."  # noqa
+            'help_copy_style',
+            default=u'Copy CSS style resources from the content header into the body, so that they will be included in the output.'  # noqa
         ),
         required=False,
         default=False,
@@ -98,13 +98,13 @@ class IRemoteProxySchema(Interface):
 
     cache_time = schema.TextLine(
         title=_(
-            "label_cache_time",
-            default=u"Cache Time"
+            'label_cache_time',
+            default=u'Cache Time'
         ),
         description=_(
-            "help_cache_time",
-            default=u"Time to cache the remote content in seconds. Empty or 0 for no caching."  # noqa
+            'help_cache_time',
+            default=u'Time to cache the remote content in seconds. Empty or 0 for no caching.'  # noqa
         ),
         required=False,
-        default=u"3600",
+        default=u'3600',
     )
