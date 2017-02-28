@@ -17,6 +17,8 @@ class RemoteProxyTraverser(DefaultPublishTraverse):
     """
 
     def publishTraverse(self, request, name):
+        import pdb
+        pdb.set_trace()
         try:
             # Default Traverser
             return DexterityPublishTraverse(

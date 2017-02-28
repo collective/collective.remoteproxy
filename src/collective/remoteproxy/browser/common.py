@@ -10,7 +10,7 @@ from zope.publisher.interfaces import IPublishTraverse
 import urlparse
 
 
-class RemoteProxyBaseView(BrowserView):
+class RemoteProxyBaseView(object):
 
     templatename = None
     content = None
@@ -57,27 +57,30 @@ class RemoteProxyBaseView(BrowserView):
         return ViewPageTemplateFile(self.templatename)(self)
 
 
-@implementer(IPublishTraverse)
-class RemoteProxyView(RemoteProxyBaseView):
+# @implementer(IPublishTraverse)
+class RemoteProxyView(BrowserView, RemoteProxyBaseView):
 
     templatename = 'view.pt'
 
-    def publishTraverse(self, request, name):
-        """Subpath traverser
-        """
-        if getattr(self, 'subpath', None) is None:
-            self.subpath = []
-        self.subpath.append(name)
-        return self
+    def __init__(self, context, request):
+        import pdb
+        pdb.set_trace()
+
+#     def publishTraverse(self, request, name):
+#         """Subpath traverser
+#         """
+#         import pdb
+#         pdb.set_trace()
+#         if getattr(self, 'subpath', None) is None:
+#             self.subpath = []
+#         self.subpath.append(name)
+#         return self
 
 
-class RemoteProxyTile(RemoteProxyBaseView, Tile):
+class RemoteProxyTile(Tile, RemoteProxyBaseView):
 
     templatename = 'tile.pt'
 
     def __init__(self, context, request):
-        super(RemoteProxyTile, self).__init__(context, request)
         import pdb
         pdb.set_trace()
-        # This method is not necessary, but if you have to debug something,
-        # place a pdb here.
