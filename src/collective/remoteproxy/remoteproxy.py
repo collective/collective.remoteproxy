@@ -48,8 +48,6 @@ def get_content(
 ):
     """Get remote html content.
     """
-    import pdb
-    pdb.set_trace()
 
     res = requests.get(remote_url)
 

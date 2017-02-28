@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
+from collective.remoteproxy import _
 from collective.remoteproxy.interfaces import IRemoteProxySchema
-from collective.remoteproxy.portlets import _
 from collective.remoteproxy.remoteproxy import get_content
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider

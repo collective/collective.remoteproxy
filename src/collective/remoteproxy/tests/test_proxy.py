@@ -25,8 +25,6 @@ class RemoteProxyIntegrationTest(unittest.TestCase):
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='RemoteProxy')
         schema = fti.lookupSchema()
-        import pdb
-        pdb.set_trace()
         self.assertEqual(IRemoteProxySchema, schema)
 
     def test_fti(self):

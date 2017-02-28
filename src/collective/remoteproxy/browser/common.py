@@ -17,9 +17,6 @@ class RemoteProxyBaseView(object):
 
     def __call__(self):
 
-        import pdb
-        pdb.set_trace()
-
         url = self.context.remote_url
 
         # url_parts[2] .. path
@@ -57,30 +54,22 @@ class RemoteProxyBaseView(object):
         return ViewPageTemplateFile(self.templatename)(self)
 
 
-# @implementer(IPublishTraverse)
-class RemoteProxyView(BrowserView, RemoteProxyBaseView):
+@implementer(IPublishTraverse)
+class RemoteProxyView(RemoteProxyBaseView, BrowserView):
 
     templatename = 'view.pt'
 
-    def __init__(self, context, request):
-        import pdb
-        pdb.set_trace()
-
-#     def publishTraverse(self, request, name):
-#         """Subpath traverser
-#         """
-#         import pdb
-#         pdb.set_trace()
-#         if getattr(self, 'subpath', None) is None:
-#             self.subpath = []
-#         self.subpath.append(name)
-#         return self
+    def publishTraverse(self, request, name):
+        """Subpath traverser
+        """
+        if getattr(self, 'subpath', None) is None:
+            self.subpath = []
+        self.subpath.append(name)
+        return self
 
 
-class RemoteProxyTile(Tile, RemoteProxyBaseView):
+class RemoteProxyTile(RemoteProxyBaseView, Tile):
 
     templatename = 'tile.pt'
 
-    def __init__(self, context, request):
-        import pdb
-        pdb.set_trace()
+#
