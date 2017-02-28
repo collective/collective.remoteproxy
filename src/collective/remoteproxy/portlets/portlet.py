@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from . import _
-from ..interfaces import IRemoteProxySchema
-from ..remoteproxy import get_content
+from collective.remoteproxy.portlets import _
+from collective.remoteproxy.interfaces import IRemoteProxySchema
+from collective.remoteproxy.remoteproxy import get_content
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFPlone.utils import getFSVersionTuple
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
-from zope.interface import implements
+from zope.interface import implementer
 
 
 PLONE5 = getFSVersionTuple()[0] >= 5
@@ -42,8 +42,8 @@ class IRemoteProxyPortlet(IRemoteProxyBasePortlet, IRemoteProxySchema):
     """
 
 
+@implementer(IRemoteProxyPortlet)
 class Assignment(base.Assignment):
-    implements(IRemoteProxyPortlet)
 
     def __init__(
         self,

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Module where all interfaces, events and exceptions live."""
 
-from . import _
+from collective.remoteproxy import _
 from zope import schema
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
@@ -51,7 +51,9 @@ class IRemoteProxySchema(Interface):
         ),
         description=_(
             'help_remote_url',
-            default=u'CSS Selector of the content. If given, only the matching content will be used. If not given, the content response will be used as a whole.'  # noqa
+            default=u'CSS Selector of the content. If given, only the '
+                    u'matching content will be used. If not given, the '
+                    u'content response will be used as a whole.'
         ),
         required=True,
         default=u'html body > *'
@@ -64,7 +66,9 @@ class IRemoteProxySchema(Interface):
         ),
         description=_(
             'help_copy_script',
-            default=u'Copy JavaScript resources from the content header into the body, so that they will be included in the output.'  # noqa
+            default=u'Copy JavaScript resources from the content header '
+                    u'into the body, so that they will be included in the '
+                    u'output.'
         ),
         required=False,
         default=False,
@@ -77,7 +81,8 @@ class IRemoteProxySchema(Interface):
         ),
         description=_(
             'help_copy_header_link',
-            default=u'Copy CSS link resources from the content header into the body, so that they will be included in the output.'  # noqa
+            default=u'Copy CSS link resources from the content header into '
+                    u'the body, so that they will be included in the output.'
         ),
         required=False,
         default=False,
@@ -90,7 +95,8 @@ class IRemoteProxySchema(Interface):
         ),
         description=_(
             'help_copy_style',
-            default=u'Copy CSS style resources from the content header into the body, so that they will be included in the output.'  # noqa
+            default=u'Copy CSS style resources from the content header into '
+                    u'the body, so that they will be included in the output.'
         ),
         required=False,
         default=False,
@@ -103,7 +109,8 @@ class IRemoteProxySchema(Interface):
         ),
         description=_(
             'help_cache_time',
-            default=u'Time to cache the remote content in seconds. Empty or 0 for no caching.'  # noqa
+            default=u'Time to cache the remote content in seconds. '
+                    u'Empty or 0 for no caching.'  # noqa
         ),
         required=False,
         default=u'3600',
