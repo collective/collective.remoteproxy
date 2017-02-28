@@ -1,0 +1,14 @@
+<section class="remoteperoxyportlet" i18n:domain="collective.remoteproxy">
+
+    <header class="portletHeader"
+        tal:define="header view/data/header"
+        tal:attributes="class python:header and 'portletHeader' or 'portletHeader titleless'"
+        tal:content="header">
+        Header
+    </header>
+
+    <section class="portletContent">
+        <div tal:replace="structure view/get_content" />
+    </section>
+
+</section>

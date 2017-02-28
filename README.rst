@@ -1,29 +1,16 @@
-====================
-collective.proxytype
-====================
+======================
+collective.remoteproxy
+======================
 
-Proxy for remote content, addably as a type and portlet.
+Proxy for remote content.
+
+Includes a remote proxy behavior, a type, a view, a tile and a portlet.
+
+All remote URLs for which a local proxy was created are replaced in the resulting content.
+
 
 .. warning::
-    This package is not ready yet.
-
-.. warning::
-    This package might introduce security problems, if the proxied site has malicious content.
-    
-
-Features
---------
-
-- Proxy type:
-  - Standard basic dublin core:
-      - Title
-      - id
-      - Description
-  - Remote Base URL
-
-- Portlet
-
-The path to the Proxy type is the base path used to replace or replaced with the remote base url.
+    This package might introduce security problems including XSS attacks, if the proxied site contains malicious content.
 
 
 License

@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<portlets>
-  <portlet
-      remove="True"
-      addview="collective.proxytype.proxyportlet"
-      title="Proxy Portlet"
-      description="This portlet allows to display remote content."
-      />
-</portlets>

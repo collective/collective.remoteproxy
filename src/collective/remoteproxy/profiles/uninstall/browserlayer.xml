@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layers>
+  <layer
+      remove="True"
+      name="collective.remoteproxy"
+      interface="collective.remoteproxy.interfaces.IBrowserLayer"
+      />
+</layers>

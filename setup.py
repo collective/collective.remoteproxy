@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = "1.0a1"
+version = "1.0.dev0"
 short_description = "Proxy for remote content"
 long_description = "\n\n".join([
     open('README.rst').read(),
@@ -12,15 +12,15 @@ long_description = "\n\n".join([
 
 
 setup(
-    name='collective.proxytype',
+    name='collective.remoteproxy',
     version=version,
     description=short_description,
     long_description=long_description,
-    # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: 4.3",
+        "Framework :: Plone :: 5.0",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
         "Operating System :: OS Independent",
@@ -29,9 +29,9 @@ setup(
     keywords='Python Plone',
     author='Johannes Raggam',
     author_email='thetetet@gmail.com',
-    url='https://pypi.python.org/pypi/collective.proxytype',
+    url='https://pypi.python.org/pypi/collective.remoteproxy',
     license='GPL version 2',
-    packages=find_packages('src', exclude=['ez_setup']),
+    packages=find_packages('src'),
     namespace_packages=['collective'],
     package_dir={'': 'src'},
     include_package_data=True,

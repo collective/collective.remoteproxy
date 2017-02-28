@@ -1,0 +1,18 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.remoteproxy">
+
+  <plone:portlet
+      name      ="collective.remoteproxy.portlet"
+      interface =".portlet.IRemoteProxyPortlet"
+      assignment=".portlet.Assignment"
+      renderer  =".portlet.Renderer"
+      addview   =".portlet.AddForm"
+      editview  =".portlet.EditForm"
+      view_permission="zope2.View"
+      edit_permission="plone.app.portlets.ManagePortlets"
+      />
+
+</configure>

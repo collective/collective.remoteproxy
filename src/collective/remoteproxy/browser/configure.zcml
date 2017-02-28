@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.remoteproxy">
+
+  <include package="plone.app.contentmenu"/>
+
+  <browser:page
+      name      ="remoteproxyview"
+      for       ="..behaviors.IRemoteProxyBehavior"
+      class     =".view.RemoteProxyView"
+      layer     ="..interfaces.IBrowserLayer"
+      permission="zope2.View"
+      menu      ="plone_displayviews"
+      title     ="Remote Proxy View"
+      />
+
+</configure>

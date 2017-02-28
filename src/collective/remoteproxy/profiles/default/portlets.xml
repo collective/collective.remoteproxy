@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<portlets>
+  <portlet
+      addview="collective.remoteproxy.portlet"
+      title="Remote Proxy Portlet"
+      description="This portlet allows to display remote content."
+      />
+</portlets>
