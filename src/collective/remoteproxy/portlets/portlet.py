@@ -54,6 +54,9 @@ class Assignment(base.Assignment):
         append_script,
         append_link,
         append_style,
+        keep_body_script,
+        keep_body_style,
+        keep_body_link,
         auth_user,
         auth_pass,
         send_cookies,
@@ -66,6 +69,9 @@ class Assignment(base.Assignment):
         self.append_script = append_script
         self.append_link = append_link
         self.append_style = append_style
+        self.keep_body_script = keep_body_script
+        self.keep_body_style = keep_body_style
+        self.keep_body_link = keep_body_link
         self.auth_user = auth_user
         self.auth_pass = auth_pass
         self.send_cookies = send_cookies
@@ -94,6 +100,9 @@ class Renderer(base.Renderer):
             append_script=self.data.append_script,
             append_link=self.data.append_link,
             append_style=self.data.append_style,
+            keep_body_script=self.data.keep_body_script,
+            keep_body_link=self.data.keep_body_link,
+            keep_body_style=self.data.keep_body_style,
             auth_user=self.data.auth_user,
             auth_pass=self.data.auth_pass,
             cookies=cookies,
