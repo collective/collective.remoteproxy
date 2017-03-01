@@ -38,17 +38,12 @@ class RemoteProxyBaseView(object):
 
         url = urlparse.urlunparse(url_parts)
 
-        # if default view is not remoteproxyview, we have to append
-        # ``@@remoteproxyview`` to the replaced URLs.
-        add_viewname = 'remoteproxyview' not in self.context.getLayout()
-
         self.content, content_type = get_content(
             remote_url=url,
             content_selector=getattr(self.context, 'content_selector', None),
             append_script=getattr(self.context, 'append_script', False),
             append_link=getattr(self.context, 'append_link', False),
             append_style=getattr(self.context, 'append_style', False),
-            add_viewname=add_viewname,
             auth_user=getattr(self.context, 'auth_user', None),
             auth_pass=getattr(self.context, 'auth_pass', None),
             cache_time=getattr(self.context, 'cache_time', 3600)

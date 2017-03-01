@@ -20,7 +20,6 @@ def _results_cachekey(
     append_script=False,
     append_style=False,
     append_link=False,
-    add_viewname=False,
     auth_user='',
     auth_pass='',
     cache_time=3600
@@ -36,7 +35,6 @@ def _results_cachekey(
         append_script,
         append_style,
         append_link,
-        add_viewname,
         auth_user,
         auth_pass,
         timeout
@@ -51,7 +49,6 @@ def get_content(
     append_script=False,
     append_link=False,
     append_style=False,
-    add_viewname=False,
     auth_user='',
     auth_pass='',
     cache_time=3600,
@@ -103,19 +100,26 @@ def get_content(
     # Create a list of remote_url, absolute_url tuples for replacement from
     # all remote proxy contents. This enables automatically linking to other
     # proxied contents.
-    _viewname = '/@@remoteproxyview' if add_viewname else ''
     cat = plone.api.portal.get_tool('portal_catalog')
     proxied_contents = cat.searchResults(
         object_provides=IRemoteProxyBehavior.__identifier__
     )
-    repl_map = [
-        (
-            it.getObject().remote_url.rstrip('/'),
-            it.getObject().absolute_url() + _viewname,
-            it.getObject().exclude_urls
+    repl_map = []
+    for it in proxied_contents:
+        ob = it.getObject()
+
+        # if the default view is not ``remoteproxyview``, we have to append
+        # ``@@remoteproxyview`` to the replaced URLs.
+        add_viewname = '/@@remoteproxyview'\
+            if 'remoteproxyview' not in ob.getLayout()\
+            else ''
+        repl_map.append(
+            (
+                ob.remote_url.rstrip('/'),
+                ob.absolute_url() + add_viewname,
+                ob.exclude_urls
+            )
         )
-        for it in proxied_contents
-    ]
 
     # Reverse sort the replacement values to support nested remote proxies.
     repl_map.sort(
