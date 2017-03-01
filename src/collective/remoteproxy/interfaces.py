@@ -55,7 +55,7 @@ class IRemoteProxySchema(Interface):
                     u'matching content will be used. If not given, the '
                     u'content response will be used as a whole.'
         ),
-        required=True,
+        required=False,
         default=u'html body > *'
     )
 
