@@ -20,6 +20,9 @@ def _results_cachekey(
     append_script=False,
     append_style=False,
     append_link=False,
+    keep_body_script=False,
+    keep_body_style=False,
+    keep_body_link=False,
     auth_user='',
     auth_pass='',
     cookies=None,
@@ -36,6 +39,9 @@ def _results_cachekey(
         append_script,
         append_style,
         append_link,
+        keep_body_script,
+        keep_body_style,
+        keep_body_link,
         auth_user,
         auth_pass,
         cookies,
@@ -51,6 +57,9 @@ def get_content(
     append_script=False,
     append_link=False,
     append_style=False,
+    keep_body_script=False,
+    keep_body_style=False,
+    keep_body_link=False,
     auth_user='',
     auth_pass='',
     cookies=None,
@@ -76,8 +85,21 @@ def get_content(
     # response = UnicodeDammit(res.text).unicode_markup
     # text = clean_html(res.text)
 
-    # Replace all relative URLs to absolute ones.
     tree = lxml.html.fromstring(res.text)
+
+    if not keep_body_script:
+        for bad in tree.xpath('/html/body//script'):
+            bad.getparent().remove(bad)
+
+    if not keep_body_style:
+        for bad in tree.xpath('/html/body//style'):
+            bad.getparent().remove(bad)
+
+    if not keep_body_link:
+        for bad in tree.xpath('/html/body//link'):
+            bad.getparent().remove(bad)
+
+    # Replace all relative URLs to absolute ones.
     tree.make_links_absolute(remote_url)
 
     c_tree = tree.cssselect(content_selector) if content_selector else [tree]

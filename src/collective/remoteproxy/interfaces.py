@@ -47,7 +47,7 @@ class IRemoteProxySchema(Interface):
     content_selector = schema.TextLine(
         title=_(
             'label_content_selector',
-            default=u'Content Selector'
+            default=u'Content selector'
         ),
         description=_(
             'help_remote_url',
@@ -62,7 +62,7 @@ class IRemoteProxySchema(Interface):
     append_script = schema.Bool(
         title=_(
             'label_copy_script',
-            default=u'Append Script tags'
+            default=u'Append script tags'
         ),
         description=_(
             'help_copy_script',
@@ -77,7 +77,7 @@ class IRemoteProxySchema(Interface):
     append_link = schema.Bool(
         title=_(
             'label_copy_link',
-            default=u'Append Link tags',
+            default=u'Append link tags',
         ),
         description=_(
             'help_copy_header_link',
@@ -91,12 +91,51 @@ class IRemoteProxySchema(Interface):
     append_style = schema.Bool(
         title=_(
             'label_copy_style',
-            default=u'Append Style tags',
+            default=u'Append style tags',
         ),
         description=_(
             'help_copy_style',
             default=u'Copy CSS style resources from the content header into '
                     u'the body, so that they will be included in the output.'
+        ),
+        required=False,
+        default=False,
+    )
+
+    keep_body_script = schema.Bool(
+        title=_(
+            'label_keep_body_script',
+            default=u'Keep body script tags',
+        ),
+        description=_(
+            'help_keep_body_script',
+            default=u'Keep or drop script tags from the body.'
+        ),
+        required=False,
+        default=False,
+    )
+
+    keep_body_link = schema.Bool(
+        title=_(
+            'label_keep_body_link',
+            default=u'Keep body link tags',
+        ),
+        description=_(
+            'help_keep_body_link',
+            default=u'Keep or drop CSS link tags from the body.'
+        ),
+        required=False,
+        default=False,
+    )
+
+    keep_body_style = schema.Bool(
+        title=_(
+            'label_keep_body_style',
+            default=u'Keep body style tags',
+        ),
+        description=_(
+            'help_keep_body_style',
+            default=u'Keep or drop style tags from the body.'
         ),
         required=False,
         default=False,
@@ -144,7 +183,7 @@ class IRemoteProxySchema(Interface):
     cache_time = schema.TextLine(
         title=_(
             'label_cache_time',
-            default=u'Cache Time'
+            default=u'Cache time'
         ),
         description=_(
             'help_cache_time',
