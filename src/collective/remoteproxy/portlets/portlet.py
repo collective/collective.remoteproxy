@@ -56,6 +56,7 @@ class Assignment(base.Assignment):
         append_style,
         auth_user,
         auth_pass,
+        send_cookies,
         cache_time
     ):
         self.header = header
@@ -67,6 +68,7 @@ class Assignment(base.Assignment):
         self.append_style = append_style
         self.auth_user = auth_user
         self.auth_pass = auth_pass
+        self.send_cookies = send_cookies
         self.cache_time = cache_time
 
     @property
@@ -85,6 +87,7 @@ class Renderer(base.Renderer):
         return True
 
     def get_content(self):
+        cookies = self.request.cookies if self.data.send_cookies else None
         content, content_type = get_content(
             remote_url=self.data.remote_url,
             content_selector=self.data.content_selector,
@@ -93,6 +96,7 @@ class Renderer(base.Renderer):
             append_style=self.data.append_style,
             auth_user=self.data.auth_user,
             auth_pass=self.data.auth_pass,
+            cookies=cookies,
             cache_time=self.data.cache_time
         )
         return content

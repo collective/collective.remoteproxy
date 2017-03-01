@@ -38,6 +38,8 @@ class RemoteProxyBaseView(object):
 
         url = urlparse.urlunparse(url_parts)
 
+        cookies = self.request.cookies if self.context.send_cookies else None
+
         self.content, content_type = get_content(
             remote_url=url,
             content_selector=getattr(self.context, 'content_selector', None),
@@ -46,6 +48,7 @@ class RemoteProxyBaseView(object):
             append_style=getattr(self.context, 'append_style', False),
             auth_user=getattr(self.context, 'auth_user', None),
             auth_pass=getattr(self.context, 'auth_pass', None),
+            cookies=cookies,
             cache_time=getattr(self.context, 'cache_time', 3600)
         )
 

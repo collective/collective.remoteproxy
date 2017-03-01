@@ -22,6 +22,7 @@ def _results_cachekey(
     append_link=False,
     auth_user='',
     auth_pass='',
+    cookies=None,
     cache_time=3600
 ):
     cache_time = int(cache_time)
@@ -37,6 +38,7 @@ def _results_cachekey(
         append_link,
         auth_user,
         auth_pass,
+        cookies,
         timeout
     )
     return cachekey
@@ -51,6 +53,7 @@ def get_content(
     append_style=False,
     auth_user='',
     auth_pass='',
+    cookies=None,
     cache_time=3600,
 ):
     """Get remote html content.
@@ -60,7 +63,7 @@ def get_content(
     if auth_user and auth_pass:
         auth = HTTPBasicAuth(auth_user, auth_pass)
 
-    res = requests.get(remote_url, auth=auth)
+    res = requests.get(remote_url, auth=auth, cookies=cookies)
 
     content_type = res.headers['Content-Type']
     if 'text/html' not in content_type:

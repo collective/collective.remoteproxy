@@ -102,20 +102,6 @@ class IRemoteProxySchema(Interface):
         default=False,
     )
 
-    cache_time = schema.TextLine(
-        title=_(
-            'label_cache_time',
-            default=u'Cache Time'
-        ),
-        description=_(
-            'help_cache_time',
-            default=u'Time to cache the remote content in seconds. '
-                    u'Empty or 0 for no caching.'  # noqa
-        ),
-        required=False,
-        default=u'3600',
-    )
-
     auth_user = schema.TextLine(
         title=_(
             'label_auth_user',
@@ -140,4 +126,31 @@ class IRemoteProxySchema(Interface):
         ),
         required=False,
         default=u'',
+    )
+
+    send_cookies = schema.Bool(
+        title=_(
+            'label_send_cookies',
+            default=u'Send cookies',
+        ),
+        description=_(
+            'help_send_cookies',
+            default=u'Send cookies of your own domain to the server.'
+        ),
+        required=False,
+        default=False,
+    )
+
+    cache_time = schema.TextLine(
+        title=_(
+            'label_cache_time',
+            default=u'Cache Time'
+        ),
+        description=_(
+            'help_cache_time',
+            default=u'Time to cache the remote content in seconds. '
+                    u'Empty or 0 for no caching.'  # noqa
+        ),
+        required=False,
+        default=u'3600',
     )
