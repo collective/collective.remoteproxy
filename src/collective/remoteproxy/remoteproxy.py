@@ -142,6 +142,6 @@ def get_content(
         # Replace double-googles within the @@remoteproxyview path.
         # Traversing to those doesn't work.
         rec = re.compile('(?!(\/@@remoteproxyview))\/@@')
-        ret = rec.sub('', ret)
+        ret = rec.sub('/', ret)
 
     return (ret, content_type)
