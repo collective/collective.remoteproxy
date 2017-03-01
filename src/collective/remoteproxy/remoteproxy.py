@@ -4,6 +4,7 @@ from collective.remoteproxy.behaviors import IRemoteProxyBehavior
 # from lxml.html.clean import clean_html
 from plone.memoize import ram
 from plone.memoize.volatile import DontCache
+from requests.auth import HTTPBasicAuth
 from time import time
 
 import lxml
@@ -20,6 +21,8 @@ def _results_cachekey(
     append_style=False,
     append_link=False,
     add_viewname=False,
+    auth_user='',
+    auth_pass='',
     cache_time=3600
 ):
     cache_time = int(cache_time)
@@ -34,6 +37,8 @@ def _results_cachekey(
         append_style,
         append_link,
         add_viewname,
+        auth_user,
+        auth_pass,
         timeout
     )
     return cachekey
@@ -47,12 +52,18 @@ def get_content(
     append_link=False,
     append_style=False,
     add_viewname=False,
+    auth_user='',
+    auth_pass='',
     cache_time=3600,
 ):
     """Get remote html content.
     """
 
-    res = requests.get(remote_url)
+    auth = None
+    if auth_user and auth_pass:
+        auth = HTTPBasicAuth(auth_user, auth_pass)
+
+    res = requests.get(remote_url, auth=auth)
 
     content_type = res.headers['Content-Type']
     if 'text/html' not in content_type:

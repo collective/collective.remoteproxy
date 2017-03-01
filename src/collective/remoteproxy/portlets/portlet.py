@@ -54,6 +54,8 @@ class Assignment(base.Assignment):
         append_script,
         append_link,
         append_style,
+        auth_user,
+        auth_pass,
         cache_time
     ):
         self.header = header
@@ -63,6 +65,8 @@ class Assignment(base.Assignment):
         self.append_script = append_script
         self.append_link = append_link
         self.append_style = append_style
+        self.auth_user = auth_user
+        self.auth_pass = auth_pass
         self.cache_time = cache_time
 
     @property
@@ -87,6 +91,8 @@ class Renderer(base.Renderer):
             append_script=self.data.append_script,
             append_link=self.data.append_link,
             append_style=self.data.append_style,
+            auth_user=self.data.auth_user,
+            auth_pass=self.data.auth_pass,
             cache_time=self.data.cache_time
         )
         return content

@@ -49,6 +49,8 @@ class RemoteProxyBaseView(object):
             append_link=getattr(self.context, 'append_link', False),
             append_style=getattr(self.context, 'append_style', False),
             add_viewname=add_viewname,
+            auth_user=getattr(self.context, 'auth_user', None),
+            auth_pass=getattr(self.context, 'auth_pass', None),
             cache_time=getattr(self.context, 'cache_time', 3600)
         )
 

@@ -115,3 +115,29 @@ class IRemoteProxySchema(Interface):
         required=False,
         default=u'3600',
     )
+
+    auth_user = schema.TextLine(
+        title=_(
+            'label_auth_user',
+            default=u'Username'
+        ),
+        description=_(
+            'help_auth_user',
+            default=u'Optional username for basic HTTP authentication.'
+        ),
+        required=False,
+        default=u'',
+    )
+
+    auth_pass = schema.TextLine(
+        title=_(
+            'label_auth_pass',
+            default=u'Password'
+        ),
+        description=_(
+            'help_auth_pass',
+            default=u'Optional password for basic HTTP authentication.'
+        ),
+        required=False,
+        default=u'',
+    )
