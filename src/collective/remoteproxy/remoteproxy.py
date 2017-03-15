@@ -12,6 +12,16 @@ import plone.api
 import re
 import requests
 
+REMOTEPROXY_ESCAPE = '###REMOTEPROXY###ESCAPE###'
+TEXT_TYPES = (
+    'application/javascript',
+    'application/json',
+    'application/xml',
+    'text/css',
+    'text/html',
+    'text/plain'
+)
+
 
 def _results_cachekey(
     method,
@@ -23,6 +33,7 @@ def _results_cachekey(
     keep_body_script=False,
     keep_body_style=False,
     keep_body_link=False,
+    extra_replacements=None,
     auth_user='',
     auth_pass='',
     cookies=None,
@@ -42,6 +53,7 @@ def _results_cachekey(
         keep_body_script,
         keep_body_style,
         keep_body_link,
+        extra_replacements,
         auth_user,
         auth_pass,
         cookies,
@@ -60,6 +72,7 @@ def get_content(
     keep_body_script=False,
     keep_body_style=False,
     keep_body_link=False,
+    extra_replacements=None,
     auth_user='',
     auth_pass='',
     cookies=None,
@@ -73,19 +86,34 @@ def get_content(
         auth = HTTPBasicAuth(auth_user, auth_pass)
 
     res = requests.get(remote_url, auth=auth, cookies=cookies)
-
     content_type = res.headers['Content-Type']
+
+    content = None
+    if content_type.split(';')[0] in TEXT_TYPES:
+        # content type is typically 'text/html; charset=UTF-8'
+        content = res.text
+        if extra_replacements:
+            # Text types can be replaced.
+            for repl in extra_replacements:
+                repl.replace('\|', REMOTEPROXY_ESCAPE)
+                search_str, repl_str = repl.split('|')
+                search_str = search_str.replace(REMOTEPROXY_ESCAPE, '|')
+                repl_str = repl_str.replace(REMOTEPROXY_ESCAPE, '|')
+                content = content.replace(search_str, repl_str)
+    else:
+        content = res.content
+
     if 'text/html' not in content_type:
         # CASE NON-HTML CONTENT (IMAGES/JAVASCRIPT/CSS/WHATEVER)
-        return (res.content, content_type)
+        return (content, content_type)
 
     # CASE HTML
 
     # Cleanup...?
-    # response = UnicodeDammit(res.text).unicode_markup
-    # text = clean_html(res.text)
+    # response = UnicodeDammit(content).unicode_markup
+    # text = clean_html(content)
 
-    tree = lxml.html.fromstring(res.text)
+    tree = lxml.html.fromstring(content)
 
     if not keep_body_script:
         for bad in tree.xpath('/html/body//script'):
