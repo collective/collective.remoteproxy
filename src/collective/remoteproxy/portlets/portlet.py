@@ -57,6 +57,7 @@ class Assignment(base.Assignment):
         keep_body_script,
         keep_body_style,
         keep_body_link,
+        extra_replacements,
         auth_user,
         auth_pass,
         send_cookies,
@@ -72,6 +73,7 @@ class Assignment(base.Assignment):
         self.keep_body_script = keep_body_script
         self.keep_body_style = keep_body_style
         self.keep_body_link = keep_body_link
+        self.extra_replacements = extra_replacements
         self.auth_user = auth_user
         self.auth_pass = auth_pass
         self.send_cookies = send_cookies
@@ -103,6 +105,7 @@ class Renderer(base.Renderer):
             keep_body_script=self.data.keep_body_script,
             keep_body_link=self.data.keep_body_link,
             keep_body_style=self.data.keep_body_style,
+            extra_replacements=self.extra_replacements,
             auth_user=self.data.auth_user,
             auth_pass=self.data.auth_pass,
             cookies=cookies,

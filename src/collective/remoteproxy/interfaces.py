@@ -56,6 +56,7 @@ class IRemoteProxySchema(Interface):
                     u'content response will be used as a whole.'
         ),
         required=False,
+        missing_value=None,
         default=u'html body > *'
     )
 
@@ -139,6 +140,23 @@ class IRemoteProxySchema(Interface):
         ),
         required=False,
         default=False,
+    )
+
+    extra_replacements = schema.Tuple(
+        title=_(
+            u'label_extra_replacements',
+            default=u'Extra Replacement Map'
+        ),
+        description=_(
+            u'help_extra_replacements',
+            default=u'List of search and replacement strings, separated by a "|" sign.'  # noqa
+                    u' For search or replacement characters containing a "|", escape them like so: "\|".'  # noqa
+                    u' One search|replacement definition per line.'
+        ),
+        value_type=schema.TextLine(),
+        required=False,
+        missing_value=(),
+        default=()
     )
 
     auth_user = schema.TextLine(
