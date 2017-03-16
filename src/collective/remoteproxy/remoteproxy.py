@@ -27,12 +27,8 @@ def _results_cachekey(
     method,
     remote_url,
     content_selector=None,
-    append_script=False,
-    append_style=False,
-    append_link=False,
-    keep_body_script=False,
-    keep_body_style=False,
-    keep_body_link=False,
+    keep_scripts=False,
+    keep_styles=False,
     extra_replacements=None,
     auth_user='',
     auth_pass='',
@@ -47,12 +43,8 @@ def _results_cachekey(
     cachekey = (
         remote_url,
         content_selector,
-        append_script,
-        append_style,
-        append_link,
-        keep_body_script,
-        keep_body_style,
-        keep_body_link,
+        keep_scripts,
+        keep_styles,
         extra_replacements,
         auth_user,
         auth_pass,
@@ -66,12 +58,8 @@ def _results_cachekey(
 def get_content(
     remote_url,
     content_selector=None,
-    append_script=False,
-    append_link=False,
-    append_style=False,
-    keep_body_script=False,
-    keep_body_style=False,
-    keep_body_link=False,
+    keep_scripts=False,
+    keep_styles=False,
     extra_replacements=None,
     auth_user='',
     auth_pass='',
@@ -115,15 +103,13 @@ def get_content(
 
     tree = lxml.html.fromstring(content)
 
-    if not keep_body_script:
+    if not keep_scripts:
         for bad in tree.xpath('/html/body//script'):
             bad.getparent().remove(bad)
 
-    if not keep_body_style:
+    if not keep_styles:
         for bad in tree.xpath('/html/body//style'):
             bad.getparent().remove(bad)
-
-    if not keep_body_link:
         for bad in tree.xpath('/html/body//link'):
             bad.getparent().remove(bad)
 
@@ -133,11 +119,10 @@ def get_content(
     c_tree = tree.cssselect(content_selector) if content_selector else [tree]
 
     append = []
-    if append_script:
+    if keep_scripts:
         append += tree.cssselect('html head script')
-    if append_style:
+    if keep_styles:
         append += tree.cssselect('html head style')
-    if append_link:
         append += tree.cssselect('html head link')
 
     for el in append:
@@ -169,8 +154,7 @@ def get_content(
         repl_map.append(
             (
                 ob.remote_url.rstrip('/'),
-                ob.absolute_url() + add_viewname,
-                ob.exclude_urls
+                ob.absolute_url() + add_viewname
             )
         )
 
@@ -182,14 +166,8 @@ def get_content(
 
     # Now, for all remote proxies, replace their remote_url with their
     # absolute_url
-    for remote_url_, absolute_url_, exclude_urls_ in repl_map:
-        if exclude_urls_:
-            rec = re.compile('(?!({0})){1}'.format(
-                '|'.join(exclude_urls_),
-                remote_url_
-            ))
-        else:
-            rec = re.compile(remote_url_)
+    for remote_url_, absolute_url_ in repl_map:
+        rec = re.compile(remote_url_)
         ret = rec.sub(absolute_url_, ret)
 
         # Replace double-googles within the @@remoteproxyview path.

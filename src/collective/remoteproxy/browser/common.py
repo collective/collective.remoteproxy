@@ -43,12 +43,8 @@ class RemoteProxyBaseView(object):
         self.content, content_type = get_content(
             remote_url=url,
             content_selector=getattr(self.context, 'content_selector', None),
-            append_script=getattr(self.context, 'append_script', False),
-            append_link=getattr(self.context, 'append_link', False),
-            append_style=getattr(self.context, 'append_style', False),
-            keep_body_script=getattr(self.context, 'keep_body_script', False),
-            keep_body_link=getattr(self.context, 'keep_body_link', False),
-            keep_body_style=getattr(self.context, 'keep_body_style', False),
+            keep_scripts=getattr(self.context, 'keep_scripts', False),
+            keep_styles=getattr(self.context, 'keep_styles', False),
             extra_replacements=getattr(self.context, 'extra_replacements', None),  # noqa
             auth_user=getattr(self.context, 'auth_user', None),
             auth_pass=getattr(self.context, 'auth_pass', None),

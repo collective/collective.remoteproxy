@@ -27,23 +27,6 @@ class IRemoteProxySchema(Interface):
         required=True,
     )
 
-    exclude_urls = schema.Tuple(
-        title=_(
-            u'label_exclude_urls',
-            default=u'Exclude URLs'
-        ),
-        description=_(
-            u'help_exclude_urls',
-            default=u'List of URLs to exclude from replacement - e.g. static '
-                    u'resources, which should be loaded directly. '
-                    u'One URL per line.'
-        ),
-        value_type=schema.TextLine(),
-        required=False,
-        missing_value=(),
-        default=()
-    )
-
     content_selector = schema.TextLine(
         title=_(
             'label_content_selector',
@@ -51,92 +34,41 @@ class IRemoteProxySchema(Interface):
         ),
         description=_(
             'help_remote_url',
-            default=u'CSS Selector of the content. If given, only the '
-                    u'matching content will be used. If not given, the '
-                    u'content response will be used as a whole.'
+            default=u'CSS Selector of the content.'
+                    u' If given, only the matching content will be used. '
+                    u' If not given, the content response will be used as a whole.'  # noqa
+                    u' Only relevant for text/html content.'
         ),
         required=False,
         missing_value=None,
         default=u'html body > *'
     )
 
-    append_script = schema.Bool(
+    keep_scripts = schema.Bool(
         title=_(
-            'label_copy_script',
-            default=u'Append script tags'
+            'label_keep_scripts',
+            default=u'Keep scripts',
         ),
         description=_(
-            'help_copy_script',
-            default=u'Copy JavaScript resources from the content header '
-                    u'into the body, so that they will be included in the '
-                    u'output.'
+            'help_keep_scripts',
+            default=u'Keep or drop script tags.'
+                    u' Tags in the body are kept as they are,'
+                    u' those from the header are appended to the content.'
         ),
         required=False,
         default=False,
     )
 
-    append_link = schema.Bool(
+    keep_styles = schema.Bool(
         title=_(
-            'label_copy_link',
-            default=u'Append link tags',
+            'label_styles',
+            default=u'Keep styles',
         ),
         description=_(
-            'help_copy_header_link',
-            default=u'Copy CSS link resources from the content header into '
-                    u'the body, so that they will be included in the output.'
-        ),
-        required=False,
-        default=False,
-    )
-
-    append_style = schema.Bool(
-        title=_(
-            'label_copy_style',
-            default=u'Append style tags',
-        ),
-        description=_(
-            'help_copy_style',
-            default=u'Copy CSS style resources from the content header into '
-                    u'the body, so that they will be included in the output.'
-        ),
-        required=False,
-        default=False,
-    )
-
-    keep_body_script = schema.Bool(
-        title=_(
-            'label_keep_body_script',
-            default=u'Keep body script tags',
-        ),
-        description=_(
-            'help_keep_body_script',
-            default=u'Keep or drop script tags from the body.'
-        ),
-        required=False,
-        default=False,
-    )
-
-    keep_body_link = schema.Bool(
-        title=_(
-            'label_keep_body_link',
-            default=u'Keep body link tags',
-        ),
-        description=_(
-            'help_keep_body_link',
-            default=u'Keep or drop CSS link tags from the body.'
-        ),
-        required=False,
-        default=False,
-    )
-
-    keep_body_style = schema.Bool(
-        title=_(
-            'label_keep_body_style',
-            default=u'Keep body style tags',
-        ),
-        description=_(
-            'help_keep_body_style',
-            default=u'Keep or drop style tags from the body.'
+            'help_keep_styles',
+            default=u'Keep or drop CSS link and style tags.'
+                    u' Tags in the body are kept as they are,'
+                    u' those from the header are appended to the content.'
         ),
         required=False,
         default=False,
@@ -152,6 +84,7 @@ class IRemoteProxySchema(Interface):
             default=u'List of search and replacement strings, separated by a "|" sign.'  # noqa
                     u' For search or replacement characters containing a "|", escape them like so: "\|".'  # noqa
                     u' One search|replacement definition per line.'
+                    u' The replacement happens for each text based mime type, including application/javascript and appplication/json.'  # noqa
         ),
         value_type=schema.TextLine(),
         required=False,
