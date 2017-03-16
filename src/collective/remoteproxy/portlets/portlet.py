@@ -49,14 +49,9 @@ class Assignment(base.Assignment):
         self,
         header,
         remote_url,
-        exclude_urls,
         content_selector,
-        append_script,
-        append_link,
-        append_style,
-        keep_body_script,
-        keep_body_style,
-        keep_body_link,
+        keep_scripts,
+        keep_styles,
         extra_replacements,
         auth_user,
         auth_pass,
@@ -65,14 +60,9 @@ class Assignment(base.Assignment):
     ):
         self.header = header
         self.remote_url = remote_url
-        self.exclude_urls = exclude_urls
         self.content_selector = content_selector
-        self.append_script = append_script
-        self.append_link = append_link
-        self.append_style = append_style
-        self.keep_body_script = keep_body_script
-        self.keep_body_style = keep_body_style
-        self.keep_body_link = keep_body_link
+        self.keep_scripts = keep_scripts
+        self.keep_styles = keep_styles
         self.extra_replacements = extra_replacements
         self.auth_user = auth_user
         self.auth_pass = auth_pass
@@ -99,12 +89,8 @@ class Renderer(base.Renderer):
         content, content_type = get_content(
             remote_url=self.data.remote_url,
             content_selector=self.data.content_selector,
-            append_script=self.data.append_script,
-            append_link=self.data.append_link,
-            append_style=self.data.append_style,
-            keep_body_script=self.data.keep_body_script,
-            keep_body_link=self.data.keep_body_link,
-            keep_body_style=self.data.keep_body_style,
+            keep_scripts=self.data.keep_scripts,
+            keep_styles=self.data.keep_styles,
             extra_replacements=self.extra_replacements,
             auth_user=self.data.auth_user,
             auth_pass=self.data.auth_pass,
