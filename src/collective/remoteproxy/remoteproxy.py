@@ -158,7 +158,8 @@ def get_content(
             )
         )
 
-    # Reverse sort the replacement values to support nested remote proxies.
+    # Reverse sort the replacement map, so that longest remote urls come first.
+    # That way, url replacement on nexted proxies doesn't get messed up.
     repl_map.sort(
         key=lambda el: el[1],
         reverse=True
