@@ -12,7 +12,6 @@ import plone.api
 import re
 import requests
 
-REMOTEPROXY_ESCAPE = '###REMOTEPROXY###ESCAPE###'
 TEXT_TYPES = (
     'application/javascript',
     'application/json',
@@ -73,6 +72,19 @@ def get_content(
     if auth_user and auth_pass:
         auth = HTTPBasicAuth(auth_user, auth_pass)
 
+    text_repl_map = []
+    if extra_replacements:
+        for repl in extra_replacements:
+            # split on "|" with negative lookbehind regex, excluding
+            # "\"-escaped "|"
+            text_repl = re.split(r'(?<!\\)\|', repl)
+            assert(len(text_repl) == 2)
+            text_repl_map.append(text_repl)
+
+    for repl in text_repl_map:
+        # Replace text in URLs.
+        remote_url = remote_url.replace(repl[0], repl[1])
+
     res = requests.get(remote_url, auth=auth, cookies=cookies)
     content_type = res.headers['Content-Type']
 
@@ -80,14 +92,9 @@ def get_content(
     if content_type.split(';')[0] in TEXT_TYPES:
         # content type is typically 'text/html; charset=UTF-8'
         content = res.text
-        if extra_replacements:
+        for repl in text_repl_map:
             # Text types can be replaced.
-            for repl in extra_replacements:
-                repl.replace('\|', REMOTEPROXY_ESCAPE)
-                search_str, repl_str = repl.split('|')
-                search_str = search_str.replace(REMOTEPROXY_ESCAPE, '|')
-                repl_str = repl_str.replace(REMOTEPROXY_ESCAPE, '|')
-                content = content.replace(search_str, repl_str)
+            content = content.replace(repl[0], repl[1])
     else:
         content = res.content
 
