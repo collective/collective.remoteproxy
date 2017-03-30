@@ -2,7 +2,6 @@
 from collective.remoteproxy.remoteproxy import get_content
 from plone.tiles.tile import Tile
 from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from urllib import urlencode
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
