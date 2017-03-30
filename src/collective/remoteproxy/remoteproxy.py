@@ -79,6 +79,11 @@ def get_content(
             # "\"-escaped "|"
             text_repl = re.split(r'(?<!\\)\|', repl)
             assert(len(text_repl) == 2)
+            # Replace escaped split characters
+            text_repl = (
+                text_repl[0].replace(u'\|', '|'),
+                text_repl[1].replace(u'\|', u'|')
+            )
             text_repl_map.append(text_repl)
 
     for repl in text_repl_map:
