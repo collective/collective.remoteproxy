@@ -13,7 +13,6 @@
       for="..behaviors.IRemoteProxyBehavior"
       class=".common.RemoteProxyView"
       template="view.pt"
-      layer="..interfaces.IBrowserLayer"
       permission="zope2.View"
       menu="plone_displayviews"
       title="Remote Proxy View"
