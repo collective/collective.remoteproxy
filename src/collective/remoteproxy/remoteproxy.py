@@ -32,7 +32,8 @@ def _results_cachekey(
     auth_user='',
     auth_pass='',
     cookies=None,
-    cache_time=3600
+    cache_time=3600,
+    standalone=None
 ):
     cache_time = int(cache_time)
     if not cache_time:
@@ -48,7 +49,8 @@ def _results_cachekey(
         auth_user,
         auth_pass,
         cookies,
-        timeout
+        timeout,
+        standalone
     )
     return cachekey
 
@@ -64,6 +66,7 @@ def get_content(
     auth_pass='',
     cookies=None,
     cache_time=3600,
+    standalone=None
 ):
     """Get remote html content.
     """
@@ -151,12 +154,22 @@ def get_content(
     # all remote proxy contents. This enables automatically linking to other
     # proxied contents.
     cat = plone.api.portal.get_tool('portal_catalog')
-    proxied_contents = cat.searchResults(
-        object_provides=IRemoteProxyBehavior.__identifier__
-    )
+    proxied_contents = []
+    if standalone:
+        proxied_contents = cat.searchResults(
+            UID=standalone
+        )
+    else:
+        proxied_contents = cat.searchResults(
+            object_provides=IRemoteProxyBehavior.__identifier__
+        )
     repl_map = []
     for it in proxied_contents:
         ob = it.getObject()
+
+        if not standalone and getattr(ob, 'standalone', False):
+            # Do not include standalone proxies when not in standalone mode.
+            continue
 
         # if the default view is not ``remoteproxyview``, we have to append
         # ``@@remoteproxyview`` to the replaced URLs.

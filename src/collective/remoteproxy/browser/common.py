@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.remoteproxy.remoteproxy import get_content
 from plone.tiles.tile import Tile
+from plone.uuid.interfaces import IUUID
 from Products.Five.browser import BrowserView
 from urllib import urlencode
 from zope.interface import implementer
@@ -48,7 +49,8 @@ class RemoteProxyBaseView(object):
             auth_user=getattr(self.context, 'auth_user', None),
             auth_pass=getattr(self.context, 'auth_pass', None),
             cookies=cookies,
-            cache_time=getattr(self.context, 'cache_time', 3600)
+            cache_time=getattr(self.context, 'cache_time', 3600),
+            standalone=IUUID(self.context) if getattr(self.context, 'standalone', False) else None  # noqa
         )
 
         if 'text/html' not in content_type:

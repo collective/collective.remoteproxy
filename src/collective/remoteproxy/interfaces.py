@@ -126,6 +126,22 @@ class IRemoteProxySchema(Interface):
         default=False,
     )
 
+    standalone = schema.Bool(
+        title=_(
+            'label_standalone',
+            default=u'Standalone proxy',
+        ),
+        description=_(
+            'help_standalone',
+            default=u'Let this proxy be a standalone proxy which ignores '
+                    u'other proxies and is ignored by other proxies. '
+                    u'This way it will not rewrite to other remote URLs '
+                    u'configured by other proxies.'
+        ),
+        required=False,
+        default=False,
+    )
+
     cache_time = schema.TextLine(
         title=_(
             'label_cache_time',
