@@ -176,9 +176,13 @@ def get_content(
         add_viewname = '/@@remoteproxyview'\
             if 'remoteproxyview' not in ob.getLayout()\
             else ''
+
+        # do not include the query string or content target when replacing
+        # keep them intact.
+        remote_url = ob.remote_url.split('?')[0].split('#')[0].rstrip('/')
         repl_map.append(
             (
-                ob.remote_url.rstrip('/'),
+                remote_url,
                 ob.absolute_url() + add_viewname
             )
         )
