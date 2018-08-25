@@ -12,6 +12,7 @@ import plone.api
 import re
 import requests
 
+
 TEXT_TYPES = (
     'application/javascript',
     'application/json',
@@ -22,36 +23,24 @@ TEXT_TYPES = (
 )
 
 
-def _results_cachekey(
-    method,
-    remote_url,
-    content_selector=None,
-    keep_scripts=False,
-    keep_styles=False,
-    extra_replacements=None,
-    auth_user='',
-    auth_pass='',
-    cookies=None,
-    cache_time=3600,
-    standalone=None
-):
-    cache_time = int(cache_time)
+def _results_cachekey(fun, self):
+    cache_time = int(self.cache_time)
     if not cache_time:
         # Don't cache on cache_time = 0 or any other falsy value
         raise DontCache
     timeout = time() // int(cache_time)
-    cachekey = (
-        remote_url,
-        content_selector,
-        keep_scripts,
-        keep_styles,
-        extra_replacements,
-        auth_user,
-        auth_pass,
-        cookies,
+    cachekey = ' '.join(str(it) for it in (
+        self.remote_url,
+        self.content_selector,
+        self.keep_scripts,
+        self.keep_styles,
+        self.extra_replacements,
+        self.auth_user,
+        self.auth_pass,
+        self.cookies,
         timeout,
-        standalone
-    )
+        self.standalone
+    ))
     return cachekey
 
 
