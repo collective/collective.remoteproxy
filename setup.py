@@ -37,13 +37,13 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'lxml',
         'plone.api',
         'plone.app.contentmenu',
         'plone.app.dexterity',
         'requests',
-        'lxml',
-        # 'beautifulsoup4',
         'setuptools',
+        'six',
     ],
     extras_require={
         'test': [

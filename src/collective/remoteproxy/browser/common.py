@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
+from Products.Five.browser import BrowserView
 from collective.remoteproxy.remoteproxy import get_content
 from plone.tiles.tile import Tile
 from plone.uuid.interfaces import IUUID
-from Products.Five.browser import BrowserView
-from urllib import urlencode
+from six.moves.urllib import parse
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
-
-import urlparse
 
 
 class RemoteProxyBaseView(object):
@@ -21,7 +19,7 @@ class RemoteProxyBaseView(object):
 
         # url_parts[2] .. path
         # url_parts[4] .. query string
-        url_parts = list(urlparse.urlparse(url))
+        url_parts = list(parse.urlparse(url))
 
         # Update path
         subpath = self.request.get(
@@ -32,11 +30,11 @@ class RemoteProxyBaseView(object):
             url_parts[2] = '/'.join([url_parts[2].rstrip('/')] + subpath)
 
         # Update query string
-        query = dict(urlparse.parse_qsl(url_parts[4]))
+        query = dict(parse.parse_qsl(url_parts[4]))
         query.update(self.request.form)
-        url_parts[4] = urlencode(query)
+        url_parts[4] = parse.urlencode(query)
 
-        url = urlparse.urlunparse(url_parts)
+        url = parse.urlunparse(url_parts)
 
         cookies = self.request.cookies if self.context.send_cookies else None
 
