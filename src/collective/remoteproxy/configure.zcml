@@ -7,7 +7,7 @@
     i18n_domain="collective.remoteproxy">
 
   <i18n:registerTranslations directory="locales" />
-  <includeDependencies package="." />
+  <include package="plone.api" />
   <include package=".browser" />
   <include package=".portlets" zcml:condition="installed plone.portlets" />
 
