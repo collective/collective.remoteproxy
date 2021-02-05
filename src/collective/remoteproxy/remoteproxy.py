@@ -85,8 +85,8 @@ def get_content(
             assert len(text_repl) == 2
             # Replace escaped split characters
             text_repl = (
-                text_repl[0].replace(u"\|", "|"),
-                text_repl[1].replace(u"\|", u"|"),
+                text_repl[0].replace(r"\|", "|"),
+                text_repl[1].replace(r"\|", u"|"),
             )
             text_repl_map.append(text_repl)
 
@@ -190,7 +190,7 @@ def get_content(
 
         # Replace double-googles within the @@remoteproxyview path.
         # Traversing to those doesn't work.
-        rec = re.compile("(?!(\/@@remoteproxyview))\/@@")
+        rec = re.compile(r"(?!(\/@@remoteproxyview))\/@@")
         ret = rec.sub("/", ret)
 
     return (ret, content_type)
