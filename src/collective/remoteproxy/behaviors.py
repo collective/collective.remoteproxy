@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from .interfaces import IRemoteProxySchema
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model

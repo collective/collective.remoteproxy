@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Setup tests for this package."""
 from collective.remoteproxy.testing import (  # noqa
     COLLECTIVE_REMOTEPROXY_INTEGRATION_TESTING,

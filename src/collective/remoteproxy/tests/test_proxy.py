@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.remoteproxy.behaviors import IRemoteProxyBehavior
 from collective.remoteproxy.interfaces import IRemoteProxySchema
 from collective.remoteproxy.testing import COLLECTIVE_PROXY_INTEGRATION_TESTING  # noqa

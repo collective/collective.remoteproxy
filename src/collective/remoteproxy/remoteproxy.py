@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.remoteproxy.behaviors import IRemoteProxyBehavior
 
 # from bs4 import UnicodeDammit
@@ -86,7 +85,7 @@ def get_content(
             # Replace escaped split characters
             text_repl = (
                 text_repl[0].replace(r"\|", "|"),
-                text_repl[1].replace(r"\|", u"|"),
+                text_repl[1].replace(r"\|", "|"),
             )
             text_repl_map.append(text_repl)
 
@@ -146,7 +145,7 @@ def get_content(
         c_tree[-1].append(el)
 
     # serialize all selected elements in order from the content tree
-    ret = u"\n".join([lxml.html.tostring(el, encoding="unicode") for el in c_tree])
+    ret = "\n".join([lxml.html.tostring(el, encoding="unicode") for el in c_tree])
 
     # Create a list of remote_url, absolute_url tuples for replacement from
     # all remote proxy contents. This enables automatically linking to other
