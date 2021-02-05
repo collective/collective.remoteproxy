@@ -1,6 +1,4 @@
-from collective.remoteproxy.testing import (  # noqa
-    COLLECTIVE_REMOTEPROXY_ACCEPTANCE_TESTING,
-)
+from ..testing import COLLECTIVE_REMOTEPROXY_ACCEPTANCE_TESTING
 from plone.app.testing import ROBOT_TEST_LEVEL
 from plone.testing import layered
 

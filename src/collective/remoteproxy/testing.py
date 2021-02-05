@@ -23,17 +23,17 @@ class BrowserLayer(PloneSandboxLayer):
 COLLECTIVE_REMOTEPROXY_FIXTURE = BrowserLayer()
 
 
-COLLECTIVE_REMOTEPROXY = IntegrationTesting(
+COLLECTIVE_REMOTEPROXY_INTEGRATION_TESTING = IntegrationTesting(
     bases=(COLLECTIVE_REMOTEPROXY_FIXTURE,), name="BrowserLayer:IntegrationTesting"
 )
 
 
-COLLECTIVE_REMOTEPROXY = FunctionalTesting(
+COLLECTIVE_REMOTEPROXY_FUNCTIONAL = FunctionalTesting(
     bases=(COLLECTIVE_REMOTEPROXY_FIXTURE,), name="BrowserLayer:FunctionalTesting"
 )
 
 
-COLLECTIVE_REMOTEPROXY = FunctionalTesting(
+COLLECTIVE_REMOTEPROXY_ACCEPTANCE_TESTING = FunctionalTesting(
     bases=(
         COLLECTIVE_REMOTEPROXY_FIXTURE,
         REMOTE_LIBRARY_BUNDLE_FIXTURE,

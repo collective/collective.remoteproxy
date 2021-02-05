@@ -1,6 +1,6 @@
-from collective.remoteproxy.behaviors import IRemoteProxyBehavior
-from collective.remoteproxy.interfaces import IRemoteProxySchema
-from collective.remoteproxy.testing import COLLECTIVE_PROXY_INTEGRATION_TESTING  # noqa
+from ..behaviors import IRemoteProxyBehavior
+from ..interfaces import IRemoteProxySchema
+from ..testing import COLLECTIVE_REMOTEPROXY_INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -8,23 +8,21 @@ from plone.dexterity.interfaces import IDexterityFTI
 from zope.component import createObject
 from zope.component import queryUtility
 
-import unittest2 as unittest
+import unittest
 
 
 class RemoteProxyIntegrationTest(unittest.TestCase):
 
-    layer = COLLECTIVE_PROXY_INTEGRATION_TESTING
+    layer = COLLECTIVE_REMOTEPROXY_INTEGRATION_TESTING
 
     def setUp(self):
         """Custom shared utility setup for tests."""
         self.portal = self.layer["portal"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        self.installer = api.portal.get_tool("portal_quickinstaller")
 
-    def test_schema(self):
+    def test_behavior(self):
         fti = queryUtility(IDexterityFTI, name="RemoteProxy")
-        schema = fti.lookupSchema()
-        self.assertEqual(IRemoteProxySchema, schema)
+        self.assertIn('collective.remoteproxy', fti.behaviors)
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name="RemoteProxy")

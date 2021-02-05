@@ -71,7 +71,9 @@ a remote proxy 'My Remote Proxy'
 # --- WHEN -------------------------------------------------------------------
 
 I type '${title}' into the title field
-  Input Text  name=form.widgets.title  ${title}
+  Debug
+  Input Text  id=form-widgets-IDublinCore-title  ${title}
+  Input Text  id=form-widgets-IRemoteProxyBehavior-remote_url  https://plone.org/
 
 I submit the form
   Click Button  Save
@@ -80,9 +82,9 @@ I go to the remote proxy view
   Go To  ${PLONE_URL}/my-remoteproxy
   Wait until page contains  Site Map
 
-I go to the remote proxy edit from
+I go to the remote proxy edit form
   Go To  ${PLONE_URL}/my-remoteproxy/edit
-  Wait until page contains  Edit remote proxy
+  Wait until page contains  Edit Remote Proxy
 
 
 # --- THEN -------------------------------------------------------------------
