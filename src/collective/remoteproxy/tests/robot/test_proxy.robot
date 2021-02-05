@@ -47,6 +47,12 @@ Scenario: As a site administrator I can view a Remote Proxy
    When I go to the remote proxy view
    Then I can see the remote proxy title 'My Remote Proxy'
 
+Scenario: As a site administrator I can edit a Remote Proxy
+  Given a logged-in site administrator
+    and a remote proxy 'My Remote Proxy'
+   When I go to the remote proxy edit form
+   Then I can see the remote proxy title 'My Remote Proxy'
+
 
 *** Keywords *****************************************************************
 
@@ -73,6 +79,10 @@ I submit the form
 I go to the remote proxy view
   Go To  ${PLONE_URL}/my-remoteproxy
   Wait until page contains  Site Map
+
+I go to the remote proxy edit from
+  Go To  ${PLONE_URL}/my-remoteproxy/edit
+  Wait until page contains  Edit remote proxy
 
 
 # --- THEN -------------------------------------------------------------------
