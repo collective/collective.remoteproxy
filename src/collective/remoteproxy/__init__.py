@@ -4,4 +4,4 @@
 from zope.i18nmessageid import MessageFactory
 
 
-_ = MessageFactory('collective.remoteproxy')
+_ = MessageFactory("collective.remoteproxy")

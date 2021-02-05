@@ -18,27 +18,25 @@ class RemoteProxyIntegrationTest(unittest.TestCase):
 
     def setUp(self):
         """Custom shared utility setup for tests."""
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer = api.portal.get_tool('portal_quickinstaller')
+        self.portal = self.layer["portal"]
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+        self.installer = api.portal.get_tool("portal_quickinstaller")
 
     def test_schema(self):
-        fti = queryUtility(IDexterityFTI, name='RemoteProxy')
+        fti = queryUtility(IDexterityFTI, name="RemoteProxy")
         schema = fti.lookupSchema()
         self.assertEqual(IRemoteProxySchema, schema)
 
     def test_fti(self):
-        fti = queryUtility(IDexterityFTI, name='RemoteProxy')
+        fti = queryUtility(IDexterityFTI, name="RemoteProxy")
         self.assertTrue(fti)
 
     def test_factory(self):
-        fti = queryUtility(IDexterityFTI, name='RemoteProxy')
+        fti = queryUtility(IDexterityFTI, name="RemoteProxy")
         factory = fti.factory
         obj = createObject(factory)
         self.assertTrue(IRemoteProxyBehavior.providedBy(obj))
 
     def test_adding(self):
-        self.portal.invokeFactory('RemoteProxy', 'RemoteProxy')
-        self.assertTrue(
-            IRemoteProxyBehavior.providedBy(self.portal['RemoteProxy'])
-        )
+        self.portal.invokeFactory("RemoteProxy", "RemoteProxy")
+        self.assertTrue(IRemoteProxyBehavior.providedBy(self.portal["RemoteProxy"]))

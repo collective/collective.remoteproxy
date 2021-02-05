@@ -23,11 +23,10 @@ class RemoteProxyBaseView(object):
 
         # Update path
         subpath = self.request.get(
-            'collective.remoteproxy__subpath',
-            getattr(self, 'subpath', [])
+            "collective.remoteproxy__subpath", getattr(self, "subpath", [])
         )
         if subpath:
-            url_parts[2] = '/'.join([url_parts[2].rstrip('/')] + subpath)
+            url_parts[2] = "/".join([url_parts[2].rstrip("/")] + subpath)
 
         # Update query string
         query = dict(parse.parse_qsl(url_parts[4]))
@@ -40,19 +39,23 @@ class RemoteProxyBaseView(object):
 
         self.content, content_type = get_content(
             remote_url=url,
-            content_selector=getattr(self.context, 'content_selector', None),
-            keep_scripts=getattr(self.context, 'keep_scripts', False),
-            keep_styles=getattr(self.context, 'keep_styles', False),
-            extra_replacements=getattr(self.context, 'extra_replacements', None),  # noqa
-            auth_user=getattr(self.context, 'auth_user', None),
-            auth_pass=getattr(self.context, 'auth_pass', None),
+            content_selector=getattr(self.context, "content_selector", None),
+            keep_scripts=getattr(self.context, "keep_scripts", False),
+            keep_styles=getattr(self.context, "keep_styles", False),
+            extra_replacements=getattr(
+                self.context, "extra_replacements", None
+            ),  # noqa
+            auth_user=getattr(self.context, "auth_user", None),
+            auth_pass=getattr(self.context, "auth_pass", None),
             cookies=cookies,
-            cache_time=getattr(self.context, 'cache_time', 3600),
-            standalone=IUUID(self.context) if getattr(self.context, 'standalone', False) else None  # noqa
+            cache_time=getattr(self.context, "cache_time", 3600),
+            standalone=IUUID(self.context)
+            if getattr(self.context, "standalone", False)
+            else None,  # noqa
         )
 
-        if 'text/html' not in content_type:
-            self.request.response.setHeader('Content-type', content_type)
+        if "text/html" not in content_type:
+            self.request.response.setHeader("Content-type", content_type)
             return self.content
 
         return self.index(*args, **kwargs)
@@ -60,11 +63,9 @@ class RemoteProxyBaseView(object):
 
 @implementer(IPublishTraverse)
 class RemoteProxyView(RemoteProxyBaseView, BrowserView):
-
     def publishTraverse(self, request, name):
-        """Subpath traverser
-        """
-        if getattr(self, 'subpath', None) is None:
+        """Subpath traverser"""
+        if getattr(self, "subpath", None) is None:
             self.subpath = []
         self.subpath.append(name)
         return self
