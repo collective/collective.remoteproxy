@@ -2,8 +2,21 @@ Changelog
 =========
 
 
-1.0 (unreleased)
+2.0 (unreleased)
+----------------
+
+- fix tests [jensens]
+
+- Code tyle black, isort [jensens]
+
+- modernize packaging and add GH Actions CI [jensens]
+
+- py 3 support, drop py 2 support [jensens]
+
+
+1.0 (2019-01-17)
 ----------------
 
 - Initial release.
-  [thet, jensens]
+  [thet]
+
