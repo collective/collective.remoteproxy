@@ -1,7 +1,4 @@
-from collective.remoteproxy.behaviors import IRemoteProxyBehavior
-
-# from bs4 import UnicodeDammit
-# from lxml.html.clean import clean_html
+from .behaviors import IRemoteProxyBehavior
 from plone.memoize import ram
 from plone.memoize.volatile import DontCache
 from requests.auth import HTTPBasicAuth
@@ -140,9 +137,9 @@ def get_content(
         append += tree.cssselect("html head style")
         append += tree.cssselect("html head link")
 
-    for el in append:
+    for element in append:
         # Append to last selected element
-        c_tree[-1].append(el)
+        c_tree[-1].append(element)
 
     # serialize all selected elements in order from the content tree
     ret = "\n".join([lxml.html.tostring(el, encoding="unicode") for el in c_tree])
@@ -159,23 +156,23 @@ def get_content(
             object_provides=IRemoteProxyBehavior.__identifier__
         )
     repl_map = []
-    for it in proxied_contents:
-        ob = it.getObject()
+    for item in proxied_contents:
+        obj = item.getObject()
 
-        if not standalone and getattr(ob, "standalone", False):
+        if not standalone and getattr(obj, "standalone", False):
             # Do not include standalone proxies when not in standalone mode.
             continue
 
         # if the default view is not ``remoteproxyview``, we have to append
         # ``@@remoteproxyview`` to the replaced URLs.
         add_viewname = (
-            "/@@remoteproxyview" if "remoteproxyview" not in ob.getLayout() else ""
+            "/@@remoteproxyview" if "remoteproxyview" not in obj.getLayout() else ""
         )
 
         # do not include the query string or content target when replacing
         # keep them intact.
-        remote_url = ob.remote_url.split("?")[0].split("#")[0].rstrip("/")
-        repl_map.append((remote_url, ob.absolute_url() + add_viewname))
+        remote_url = obj.remote_url.split("?")[0].split("#")[0].rstrip("/")
+        repl_map.append((remote_url, obj.absolute_url() + add_viewname))
 
     # Reverse sort the replacement map, so that longest remote urls come first.
     # That way, url replacement on nexted proxies doesn't get messed up.
