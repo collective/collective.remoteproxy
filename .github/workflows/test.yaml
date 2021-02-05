@@ -22,7 +22,7 @@ jobs:
       - name: "Install Python dependencies (pip)"
         uses: "py-actions/py-dependency-install@v2"
         with:
-          path: "requirements-5.2.txt"
+          path: "requirements-5.2.x.txt"
           update-setuptools: "false"
           update-pip: "true"
           update-wheel: "true"
