@@ -17,9 +17,7 @@ if PLONE5:
     base_EditForm = base.EditForm
 else:
     from plone.app.portlets.browser.z3cformhelper import AddForm as base_AddForm  # noqa
-    from plone.app.portlets.browser.z3cformhelper import (
-        EditForm as base_EditForm,
-    )  # noqa
+    from plone.app.portlets.browser.z3cformhelper import EditForm as base_EditForm  # noqa
     from z3c.form import field
 
 
