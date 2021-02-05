@@ -2,6 +2,9 @@
 collective.remoteproxy
 ======================
 
+.. image:: https://github.com/collective/collective.remoteproxy/workflows/Testing/badge.svg
+    :target: https://github.com/collective/collective.remoteproxy/actions?query=workflow%3ATesting
+
 Proxy for remote content.
 
 Includes a remote proxy behavior, a type, a view, a tile and a portlet.
