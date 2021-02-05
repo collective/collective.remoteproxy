@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from Products.Five.browser import BrowserView
 from collective.remoteproxy.remoteproxy import get_content
 from plone.tiles.tile import Tile
 from plone.uuid.interfaces import IUUID
+from Products.Five.browser import BrowserView
 from six.moves.urllib import parse
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse

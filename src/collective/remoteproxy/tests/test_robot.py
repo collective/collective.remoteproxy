@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from collective.remoteproxy.testing import (
+from collective.remoteproxy.testing import (  # noqa
     COLLECTIVE_REMOTEPROXY_ACCEPTANCE_TESTING,
-)  # noqa
+)
 from plone.app.testing import ROBOT_TEST_LEVEL
 from plone.testing import layered
 
