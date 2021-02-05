@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0 (unreleased)
+2.0 (2021-02-05)
 ----------------
 
 - fix tests [jensens]
