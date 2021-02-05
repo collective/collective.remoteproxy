@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.remoteproxy import _
 from collective.remoteproxy.interfaces import IRemoteProxySchema
 from collective.remoteproxy.remoteproxy import get_content
@@ -17,7 +16,9 @@ if PLONE5:
     base_EditForm = base.EditForm
 else:
     from plone.app.portlets.browser.z3cformhelper import AddForm as base_AddForm  # noqa
-    from plone.app.portlets.browser.z3cformhelper import EditForm as base_EditForm  # noqa
+    from plone.app.portlets.browser.z3cformhelper import (
+        EditForm as base_EditForm,
+    )  # noqa
     from z3c.form import field
 
 
@@ -25,10 +26,10 @@ class IRemoteProxyBasePortlet(IPortletDataProvider):
     """Portlet base schema interface."""
 
     header = schema.TextLine(
-        title=_("label_header", default=u"Portlet header"),
-        description=_("help_header", u"Title of the rendered portlet."),
+        title=_("label_header", default="Portlet header"),
+        description=_("help_header", "Title of the rendered portlet."),
         required=False,
-        default=u"",
+        default="",
     )
 
 
@@ -69,7 +70,7 @@ class Assignment(base.Assignment):
         if self.header:
             return self.header
         else:
-            return _(u"Remote Proxy Portlet")
+            return _("Remote Proxy Portlet")
 
 
 class Renderer(base.Renderer):
@@ -104,8 +105,8 @@ class AddForm(base_AddForm):
     else:
         fields = field.Fields(IRemoteProxyPortlet)
 
-    label = _(u"Add Remote Proxy Portlet")
-    description = _(u"This portlet allows to display remote content.")
+    label = _("Add Remote Proxy Portlet")
+    description = _("This portlet allows to display remote content.")
 
     def create(self, data):
         return Assignment(**data)
@@ -117,5 +118,5 @@ class EditForm(base_EditForm):
     else:
         fields = field.Fields(IRemoteProxyPortlet)
 
-    label = _(u"Edit Remote Proxy Portlet")
-    description = _(u"This portlet allows to display remote content.")
+    label = _("Edit Remote Proxy Portlet")
+    description = _("This portlet allows to display remote content.")

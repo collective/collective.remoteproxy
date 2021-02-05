@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.remoteproxy.remoteproxy import get_content
 from plone.tiles.tile import Tile
 from plone.uuid.interfaces import IUUID
@@ -8,7 +7,7 @@ from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
 
-class RemoteProxyBaseView(object):
+class RemoteProxyBaseView:
 
     templatename = None
     content = None

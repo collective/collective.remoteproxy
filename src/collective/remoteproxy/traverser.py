@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from .behaviors import IRemoteProxyBehavior
 from plone.dexterity.browser.traversal import DexterityPublishTraverse
 from zope.component import adapter

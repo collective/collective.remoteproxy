@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.remoteproxy.testing import (  # noqa
     COLLECTIVE_REMOTEPROXY_ACCEPTANCE_TESTING,
 )
