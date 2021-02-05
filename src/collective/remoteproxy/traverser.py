@@ -14,16 +14,16 @@ except ImportError:
 
 @adapter(IRemoteProxyBehavior, IBrowserRequest)
 class RemoteProxyTraverser(DefaultPublishTraverse):
-    """Remote proxy traverser.
-    """
+    """Remote proxy traverser."""
 
     def publishTraverse(self, request, name):
         try:
             # Default Traverser
-            return DexterityPublishTraverse(
-                self.context, request).publishTraverse(request, name)
+            return DexterityPublishTraverse(self.context, request).publishTraverse(
+                request, name
+            )
         except (LocationError, KeyError):
-            subpath = self.request.get('collective.remoteproxy__subpath', [])
+            subpath = self.request.get("collective.remoteproxy__subpath", [])
             subpath.append(name)
-            self.request['collective.remoteproxy__subpath'] = subpath
+            self.request["collective.remoteproxy__subpath"] = subpath
             return self.context

@@ -7,5 +7,4 @@ from zope.interface import provider
 
 @provider(IFormFieldProvider)
 class IRemoteProxyBehavior(model.Schema, IRemoteProxySchema):
-    """Behavior Interface for proxy behaviors.
-    """
+    """Behavior Interface for proxy behaviors."""
