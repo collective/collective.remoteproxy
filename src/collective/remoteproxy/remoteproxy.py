@@ -97,6 +97,8 @@ def get_content(
         # here doesn't mess things up.
         cookies = {
             str(name): safe_text(value, encoding="latin-1")
+            .replace("\r", "")
+            .replace("\n", "")
             for name, value in cookies.items()
         }
 
