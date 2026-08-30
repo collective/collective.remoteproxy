@@ -1,6 +1,7 @@
 from .behaviors import IRemoteProxyBehavior
 from plone.memoize import ram
 from plone.memoize.volatile import DontCache
+from Products.CMFPlone.utils import safe_text
 from requests.auth import HTTPBasicAuth
 from time import time
 
@@ -8,7 +9,6 @@ import lxml
 import plone.api
 import re
 import requests
-
 
 TEXT_TYPES = (
     "application/javascript",
@@ -89,6 +89,16 @@ def get_content(
     for repl in text_repl_map:
         # Replace text in URLs.
         remote_url = remote_url.replace(repl[0], repl[1])
+
+    if cookies:
+        # encode cookie values as latin-1, as cookies are http byte
+        # values which directly map to latin-1. Text within cookies
+        # can hava a different encoding, but the latin-1 encoding
+        # here doesn't mess things up.
+        cookies = {
+            str(name): safe_text(value, encoding="latin-1")
+            for name, value in cookies.items()
+        }
 
     res = requests.get(remote_url, auth=auth, cookies=cookies)
     content_type = res.headers["Content-Type"]

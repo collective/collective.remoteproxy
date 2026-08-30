@@ -5,7 +5,9 @@ Changelog
 2.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix a problem with cookie encoding.
+  Fixes: #2
+  [thet]
 
 
 2.0 (2021-02-05)
