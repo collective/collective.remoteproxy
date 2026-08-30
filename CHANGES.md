@@ -1,9 +1,13 @@
-Changelog
-=========
+## 3.0 (unreleased)
 
+- Plone 6.2+ release:
+  - Plone 6.2+ only release.
+  - Support for Python 3.10+ only.
+  - Switch to native namespaces.
+  - Switch to pyproject.toml.
+  - Modernize package.
 
-2.1 (unreleased)
-----------------
+## 2.1 (unreleased)
 
 Breaking change:
 
@@ -23,9 +27,7 @@ Bugfixes:
   Fixes: #2
   [thet]
 
-
-2.0 (2021-02-05)
-----------------
+## 2.0 (2021-02-05)
 
 - fix tests [jensens]
 
@@ -35,10 +37,7 @@ Bugfixes:
 
 - py 3 support, drop py 2 support [jensens]
 
-
-1.0 (2019-01-17)
-----------------
+## 1.0 (2019-01-17)
 
 - Initial release.
   [thet]
-
