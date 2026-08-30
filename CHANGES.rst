@@ -5,6 +5,9 @@ Changelog
 2.1 (unreleased)
 ----------------
 
+- Don't break, if plone.tiles is not installed.
+  [thet]
+
 - Fix a problem with cookie encoding.
   Fixes: #2
   [thet]
