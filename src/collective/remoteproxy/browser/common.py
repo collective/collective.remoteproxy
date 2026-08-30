@@ -1,10 +1,14 @@
-from ..remoteproxy import get_content
-from plone.tiles.tile import Tile
+from collective.remoteproxy.remoteproxy import get_content
 from plone.uuid.interfaces import IUUID
 from Products.Five.browser import BrowserView
 from urllib import parse
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
+
+try:
+    from plone.tiles.tile import Tile
+except ImportError:
+    Tile = object
 
 
 class RemoteProxyBaseView:
