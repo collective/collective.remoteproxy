@@ -1,7 +1,7 @@
 from .behaviors import IRemoteProxyBehavior
 from plone.memoize import ram
 from plone.memoize.volatile import DontCache
-from Products.CMFPlone.utils import safe_text
+from plone.base.utils import safe_text
 from requests.auth import HTTPBasicAuth
 from time import time
 
