@@ -1,0 +1,106 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "collective.remoteproxy"
+dynamic = ["version"]
+description = "Proxy for remote content in Plone pages."
+readme = "README.md"
+license = "GPL-2.0-only"
+requires-python = ">=3.10"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Framework :: Plone",
+  "Framework :: Plone :: 6.2",
+  "Framework :: Plone :: Addon",
+  "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+  "plone.autoform",
+  "plone.supermodel",
+  "zope.interface",
+  "zope.schema",
+  "requests",
+  "plone.api",
+  "lxml",
+  "plone.memoize",
+  "plone.base",
+  "plone.dexterity",
+  "zope.component",
+  "zope.location",
+  "zope.publisher",
+]
+
+[project.entry-points."z3c.autoinclude.plugin"]
+target = "plone"
+
+[project.urls]
+Homepage = "https://github.com/collective/collective.remoteproxy"
+Repository = "https://github.com/collective/collective.remoteproxy"
+Changelog = "https://github.com/collective/collective.remoteproxy/blob/main/CHANGES.md"
+Issues = "https://github.com/collective/collective.remoteproxy/issues"
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-cov", "coverage[toml]>=7.0"]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["example/"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/collective"]
+
+[tool.hatch.version]
+source = "vcs"
+raw-options = { local_scheme = "no-local-version" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+parallel = true
+source_pkgs = ["collective.remoteproxy"]
+relative_files = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:"]
+
+[tool.ruff]
+target-version = "py312"
+extend-exclude = ["example"]
+
+[tool.ruff.lint]
+select = ["A", "B", "C4", "E", "F", "I", "RUF", "SIM", "T20", "UP", "W"]
+ignore = ["E501", "RUF001", "RUF002", "SIM105"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*" = ["T201"]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+from-first = true
+lines-after-imports = 2
+lines-between-types = 1
+no-sections = true
+order-by-type = false
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 120
+max-doc-length = 120
+
+[tool.uv]
+# Make uv check git tags instead of pyproject
+# mtime.
+cache-keys = [
+  { file = "pyproject.toml" },
+  { git = { commit = true, tags = true } },
+]

@@ -1,5 +1,0 @@
-====================
-collective.proxytype
-====================
-
-User documentation
