@@ -1,5 +1,5 @@
-from ..remoteproxy import _cookie_name_matches
-from ..remoteproxy import _filter_cookies
+from collective.remoteproxy.remoteproxy import _cookie_name_matches
+from collective.remoteproxy.remoteproxy import _filter_cookies
 
 import unittest
 

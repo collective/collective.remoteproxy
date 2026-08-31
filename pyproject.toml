@@ -49,7 +49,14 @@ Changelog = "https://github.com/collective/collective.remoteproxy/blob/main/CHAN
 Issues = "https://github.com/collective/collective.remoteproxy/issues"
 
 [project.optional-dependencies]
-test = ["pytest", "pytest-cov", "coverage[toml]>=7.0"]
+test = [
+  "plone.app.robotframework",
+  "plone.app.testing",
+  "pytest",
+  "pytest-cov",
+  "pytest-plone",
+  "coverage[toml]>=7.0",
+]
 
 [tool.hatch.build.targets.sdist]
 exclude = ["example/"]
