@@ -20,6 +20,46 @@ TEXT_TYPES = (
 )
 
 
+def _cookie_name_matches(name, pattern):
+    """Return whether a cookie name matches an allow-list pattern.
+
+    The only supported wildcard is ``*``, which matches zero or more
+    characters.  All other characters are treated literally.
+    """
+
+    parts = pattern.split("*")
+    if len(parts) == 1:
+        return name == pattern
+
+    if not name.startswith(parts[0]):
+        return False
+    if parts[-1] and not name.endswith(parts[-1]):
+        return False
+
+    position = len(parts[0])
+    end = len(name) - len(parts[-1]) if parts[-1] else len(name)
+    for part in parts[1:-1]:
+        position = name.find(part, position, end)
+        if position == -1:
+            return False
+        position += len(part)
+    return position <= end
+
+
+def _filter_cookies(cookies, allowed_cookies):
+    """Return only cookies whose names are explicitly allowed."""
+
+    if not cookies:
+        return {}
+
+    allowed_cookies = [pattern for pattern in allowed_cookies if pattern]
+    return {
+        str(name): safe_text(value, encoding="latin-1")
+        for name, value in cookies.items()
+        if any(_cookie_name_matches(str(name), pattern) for pattern in allowed_cookies)
+    }
+
+
 def _results_cachekey(
     method,
     remote_url,
@@ -30,6 +70,7 @@ def _results_cachekey(
     auth_user="",
     auth_pass="",
     cookies=None,
+    allowed_cookies=(),
     cache_time=3600,
     standalone=None,
 ):
@@ -47,6 +88,7 @@ def _results_cachekey(
         auth_user,
         auth_pass,
         cookies,
+        allowed_cookies,
         timeout,
         standalone,
     )
@@ -63,6 +105,7 @@ def get_content(
     auth_user="",
     auth_pass="",
     cookies=None,
+    allowed_cookies=(),
     cache_time=3600,
     standalone=None,
 ):
@@ -90,17 +133,8 @@ def get_content(
         # Replace text in URLs.
         remote_url = remote_url.replace(repl[0], repl[1])
 
-    if cookies:
-        # encode cookie values as latin-1, as cookies are http byte
-        # values which directly map to latin-1. Text within cookies
-        # can hava a different encoding, but the latin-1 encoding
-        # here doesn't mess things up.
-        cookies = {
-            str(name): safe_text(value, encoding="latin-1")
-            .replace("\r", "")
-            .replace("\n", "")
-            for name, value in cookies.items()
-        }
+    # An empty allow-list deliberately sends no cookies.
+    cookies = _filter_cookies(cookies, allowed_cookies)
 
     res = requests.get(remote_url, auth=auth, cookies=cookies)
     content_type = res.headers["Content-Type"]
