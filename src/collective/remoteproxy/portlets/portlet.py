@@ -8,7 +8,6 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
 from zope.interface import implementer
 
-
 PLONE5 = getFSVersionTuple()[0] >= 5
 
 if PLONE5:
@@ -52,6 +51,7 @@ class Assignment(base.Assignment):
         auth_user,
         auth_pass,
         send_cookies,
+        allowed_cookies,
         cache_time,
     ):
         self.header = header
@@ -63,6 +63,7 @@ class Assignment(base.Assignment):
         self.auth_user = auth_user
         self.auth_pass = auth_pass
         self.send_cookies = send_cookies
+        self.allowed_cookies = allowed_cookies
         self.cache_time = cache_time
 
     @property
@@ -87,10 +88,11 @@ class Renderer(base.Renderer):
             content_selector=self.data.content_selector,
             keep_scripts=self.data.keep_scripts,
             keep_styles=self.data.keep_styles,
-            extra_replacements=self.extra_replacements,
+            extra_replacements=self.data.extra_replacements,
             auth_user=self.data.auth_user,
             auth_pass=self.data.auth_pass,
             cookies=cookies,
+            allowed_cookies=self.data.allowed_cookies,
             cache_time=self.data.cache_time,
         )
         return content
