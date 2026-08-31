@@ -8,7 +8,6 @@ from plone.testing.zope import WSGI_SERVER_FIXTURE
 
 
 class Layer(PloneSandboxLayer):
-
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):

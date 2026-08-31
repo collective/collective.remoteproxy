@@ -1,24 +1,15 @@
 from collective.remoteproxy import _
 from collective.remoteproxy.interfaces import IRemoteProxySchema
 from collective.remoteproxy.remoteproxy import get_content
+from plone.app.portlets.browser.z3cformhelper import AddForm as base_AddForm
+from plone.app.portlets.browser.z3cformhelper import EditForm as base_EditForm
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFPlone.utils import getFSVersionTuple
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from z3c.form import field
 from zope import schema
 from zope.interface import implementer
-
-PLONE5 = getFSVersionTuple()[0] >= 5
-
-if PLONE5:
-    base_AddForm = base.AddForm
-    base_EditForm = base.EditForm
-else:
-    from plone.app.portlets.browser.z3cformhelper import AddForm as base_AddForm  # noqa
-    from plone.app.portlets.browser.z3cformhelper import (
-        EditForm as base_EditForm,
-    )  # noqa
-    from z3c.form import field
 
 
 class IRemoteProxyBasePortlet(IPortletDataProvider):
@@ -102,11 +93,7 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base_AddForm):
-    if PLONE5:
-        schema = IRemoteProxyPortlet
-    else:
-        fields = field.Fields(IRemoteProxyPortlet)
-
+    fields = field.Fields(IRemoteProxyPortlet)
     label = _("Add Remote Proxy Portlet")
     description = _("This portlet allows to display remote content.")
 
@@ -115,10 +102,6 @@ class AddForm(base_AddForm):
 
 
 class EditForm(base_EditForm):
-    if PLONE5:
-        schema = IRemoteProxyPortlet
-    else:
-        fields = field.Fields(IRemoteProxyPortlet)
-
+    fields = field.Fields(IRemoteProxyPortlet)
     label = _("Edit Remote Proxy Portlet")
     description = _("This portlet allows to display remote content.")

@@ -5,7 +5,6 @@ import unittest
 
 
 class CookieFilterTest(unittest.TestCase):
-
     def test_exact_name(self):
         self.assertTrue(_cookie_name_matches("session", "session"))
         self.assertFalse(_cookie_name_matches("session_id", "session"))

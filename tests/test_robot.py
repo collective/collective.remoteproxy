@@ -7,8 +7,8 @@ import pytest
 import robotsuite
 import unittest
 
-#@pytest.mark.skip(reason="Test setup problem. Fixing later.")
-#def test_suite():
+# @pytest.mark.skip(reason="Test setup problem. Fixing later.")
+# def test_suite():
 #    suite = unittest.TestSuite()
 #    current_dir = os.path.abspath(os.path.dirname(__file__))
 #    robot_dir = os.path.join(current_dir, "robot")

@@ -12,7 +12,6 @@ import unittest
 
 
 class RemoteProxyIntegrationTest(unittest.TestCase):
-
     layer = INTEGRATION_TESTING
 
     def setUp(self):
@@ -22,7 +21,7 @@ class RemoteProxyIntegrationTest(unittest.TestCase):
 
     def test_behavior(self):
         fti = queryUtility(IDexterityFTI, name="RemoteProxy")
-        self.assertIn('collective.remoteproxy', fti.behaviors)
+        self.assertIn("collective.remoteproxy", fti.behaviors)
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name="RemoteProxy")
