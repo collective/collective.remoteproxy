@@ -1,13 +1,9 @@
-# -*- coding: utf-8 -*-
-"""Setup tests for this package."""
-
-import unittest
-
+from collective.remoteproxy.testing import INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import TEST_USER_ID, setRoles
 from plone.base.utils import get_installer
 
-from collective.remoteproxy.testing import INTEGRATION_TESTING
+import unittest
 
 
 class TestSetup(unittest.TestCase):

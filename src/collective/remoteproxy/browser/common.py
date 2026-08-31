@@ -29,7 +29,7 @@ class RemoteProxyBaseView:
             "collective.remoteproxy__subpath", getattr(self, "subpath", [])
         )
         if subpath:
-            url_parts[2] = "/".join([url_parts[2].rstrip("/")] + subpath)
+            url_parts[2] = /".join([url_parts[2].rstrip("/")] + subpath)
 
         # Update query string
         query = dict(parse.parse_qsl(url_parts[4]))
