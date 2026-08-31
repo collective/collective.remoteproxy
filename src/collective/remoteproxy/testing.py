@@ -4,11 +4,10 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.testing import z2
+from plone.testing.zope import WSGI_SERVER_FIXTURE
 
 
-class BrowserLayer(PloneSandboxLayer):
-
+class Layer(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
@@ -20,24 +19,25 @@ class BrowserLayer(PloneSandboxLayer):
         applyProfile(portal, "collective.remoteproxy:default")
 
 
-COLLECTIVE_REMOTEPROXY_FIXTURE = BrowserLayer()
+FIXTURE = Layer()
 
-
-COLLECTIVE_REMOTEPROXY_INTEGRATION_TESTING = IntegrationTesting(
-    bases=(COLLECTIVE_REMOTEPROXY_FIXTURE,), name="BrowserLayer:IntegrationTesting"
+INTEGRATION_TESTING = IntegrationTesting(
+    bases=(FIXTURE,),
+    name="collective.remoteproxy:IntegrationTesting",
 )
 
 
-COLLECTIVE_REMOTEPROXY_FUNCTIONAL = FunctionalTesting(
-    bases=(COLLECTIVE_REMOTEPROXY_FIXTURE,), name="BrowserLayer:FunctionalTesting"
+FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(FIXTURE, WSGI_SERVER_FIXTURE),
+    name="collective.remoteproxy:FunctionalTesting",
 )
 
 
-COLLECTIVE_REMOTEPROXY_ACCEPTANCE_TESTING = FunctionalTesting(
+ACCEPTANCE_TESTING = FunctionalTesting(
     bases=(
-        COLLECTIVE_REMOTEPROXY_FIXTURE,
+        FIXTURE,
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE,
+        WSGI_SERVER_FIXTURE,
     ),
-    name="BrowserLayer:AcceptanceTesting",
+    name="collective.remoteproxy:AcceptanceTesting",
 )

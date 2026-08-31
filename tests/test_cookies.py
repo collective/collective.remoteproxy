@@ -1,11 +1,10 @@
-from ..remoteproxy import _cookie_name_matches
-from ..remoteproxy import _filter_cookies
+from collective.remoteproxy.remoteproxy import _cookie_name_matches
+from collective.remoteproxy.remoteproxy import _filter_cookies
 
 import unittest
 
 
 class CookieFilterTest(unittest.TestCase):
-
     def test_exact_name(self):
         self.assertTrue(_cookie_name_matches("session", "session"))
         self.assertFalse(_cookie_name_matches("session_id", "session"))

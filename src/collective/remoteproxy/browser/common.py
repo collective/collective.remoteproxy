@@ -13,7 +13,6 @@ except ImportError:
 
 
 class RemoteProxyBaseView:
-
     templatename = None
     content = None
 
@@ -46,9 +45,7 @@ class RemoteProxyBaseView:
             content_selector=getattr(self.context, "content_selector", None),
             keep_scripts=getattr(self.context, "keep_scripts", False),
             keep_styles=getattr(self.context, "keep_styles", False),
-            extra_replacements=getattr(
-                self.context, "extra_replacements", None
-            ),  # noqa
+            extra_replacements=getattr(self.context, "extra_replacements", None),
             auth_user=getattr(self.context, "auth_user", None),
             auth_pass=getattr(self.context, "auth_pass", None),
             cookies=cookies,
@@ -56,7 +53,7 @@ class RemoteProxyBaseView:
             cache_time=getattr(self.context, "cache_time", 3600),
             standalone=IUUID(self.context)
             if getattr(self.context, "standalone", False)
-            else None,  # noqa
+            else None,
         )
 
         if "text/html" not in content_type:

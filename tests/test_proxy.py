@@ -1,6 +1,6 @@
-from ..behaviors import IRemoteProxyBehavior
-from ..interfaces import IRemoteProxySchema
-from ..testing import COLLECTIVE_REMOTEPROXY_INTEGRATION_TESTING
+from collective.remoteproxy.behaviors import IRemoteProxyBehavior
+from collective.remoteproxy.interfaces import IRemoteProxySchema
+from collective.remoteproxy.testing import INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -12,8 +12,7 @@ import unittest
 
 
 class RemoteProxyIntegrationTest(unittest.TestCase):
-
-    layer = COLLECTIVE_REMOTEPROXY_INTEGRATION_TESTING
+    layer = INTEGRATION_TESTING
 
     def setUp(self):
         """Custom shared utility setup for tests."""
@@ -22,7 +21,7 @@ class RemoteProxyIntegrationTest(unittest.TestCase):
 
     def test_behavior(self):
         fti = queryUtility(IDexterityFTI, name="RemoteProxy")
-        self.assertIn('collective.remoteproxy', fti.behaviors)
+        self.assertIn("collective.remoteproxy", fti.behaviors)
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name="RemoteProxy")
