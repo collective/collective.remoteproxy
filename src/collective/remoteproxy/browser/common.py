@@ -5,6 +5,7 @@ from urllib import parse
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
+
 try:
     from plone.tiles.tile import Tile
 except ImportError:
@@ -51,6 +52,7 @@ class RemoteProxyBaseView:
             auth_user=getattr(self.context, "auth_user", None),
             auth_pass=getattr(self.context, "auth_pass", None),
             cookies=cookies,
+            allowed_cookies=getattr(self.context, "allowed_cookies", ()),
             cache_time=getattr(self.context, "cache_time", 3600),
             standalone=IUUID(self.context)
             if getattr(self.context, "standalone", False)

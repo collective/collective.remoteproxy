@@ -110,6 +110,20 @@ class IRemoteProxySchema(Interface):
         default=False,
     )
 
+    allowed_cookies = schema.Tuple(
+        title=_("label_allowed_cookies", default="Allowed cookies"),
+        description=_(
+            "help_allowed_cookies",
+            default="Define the cookies which will be sent to the remote, one per line. "
+            "Only listed cookies are sent. Use * as a wildcard for zero or more "
+            "characters. Leave empty to send no cookies.",
+        ),
+        value_type=schema.TextLine(),
+        required=False,
+        default=(),
+        missing_value=(),
+    )
+
     standalone = schema.Bool(
         title=_(
             "label_standalone",

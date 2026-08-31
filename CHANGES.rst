@@ -5,6 +5,17 @@ Changelog
 2.1 (unreleased)
 ----------------
 
+Breaking change:
+
+- Introduce a `allowed_cookies` whitelist and set this as new default.
+  To send cookies you need to enable the `send_cookies` switch and define all
+  the cookies you want to send in `allowed_cookies`. An empty `allowed_cookies`
+  setting will not send any cookies, even if `send_cookies` is active. You can
+  use the `*` wildcard to match zero or more characters.
+  [thet]
+
+Bugfixes:
+
 - Don't break, if plone.tiles is not installed.
   [thet]
 
